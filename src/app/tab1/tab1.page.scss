@@ -3,11 +3,12 @@
   overflow: hidden;
 
 }
-
-.list-md {
-  margin-top: 30vh;
-  margin-bottom: 5vh;
-
+page-tab1 {
+  .ion-title * {
+    padding-top: 30vh;
+    margin-bottom: 5vh;
+  }
 }
+
 
 
