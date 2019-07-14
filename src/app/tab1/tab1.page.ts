@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import { RegisterPage} from '../register/register.page';
 
 @Component({
   selector: 'app-tab1',
