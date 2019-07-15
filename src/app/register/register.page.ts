@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController} from '@ionic/angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  username: string;
-  password: string;
-  repassword: string;
+  username: '';
+  password: '';
+  repassword: '';
+  items;
 
-  constructor() { }
+  constructor(public navCtrl: NavController, public afd: AngularFireDatabase) {
+      this.getDataFromFirebase();
+  }
 
   ngOnInit() {
   }
@@ -22,15 +26,27 @@ export class RegisterPage implements OnInit {
 
   register() {
       console.log("Username: " + this.username);
-      alert('Welcome to Kai King ' + this.username + '!')
+      console.log("Password: " + this.password);
+      console.log("Repassword: " + this.repassword);
 
-      // alert('Test');
-      if (this.username.length === 0 || this.password.length === 0 || this.repassword.length === 0) {
-        alert('Please fill in all fields');
-      } else {
+
+      if (this.username && this.password && this.repassword) {
           console.log("Username: " + this.username);
-          console.log("Password: " + this.password);
+          alert('Welcome to Kai King ' + this.username + '!');
+      } else {
+          alert('Please fill in all fields');
+
       }
+
+  }
+
+  getDataFromFirebase() {
+      this.afd.list('/users').valueChanges().subscribe(
+          data => {
+              console.log(JSON.stringify(data));
+              this.items = data;
+          }
+      );
 
   }
 
