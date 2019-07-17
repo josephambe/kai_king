@@ -1,0 +1,33 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='tabs'></ion-back-button>
+    </ion-buttons>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-title text-center="">Join our whanau!</ion-title>
+  <ion-list>
+    <ion-item>
+      <ion-input placeholder="Username" [(ngModel)]="newUser.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Password" type="password" [(ngModel)]="newUser.password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Repeat Password" type="password" [(ngModel)]="repassword"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button fill="solid" (click)="register()">Register</ion-button>
+
+
+
+
+
+</ion-content>
+
+

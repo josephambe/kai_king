@@ -1,18 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
+    <ion-title text-center="">
       Login Page
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding center text-center="">
+  <ion-title>Kai King</ion-title>
     <ion-list>
       <ion-item>
-        <ion-input placeholder="Username"></ion-input>
+        <ion-input placeholder="Username" [(ngModel)]="username"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Password"></ion-input>
+        <ion-input placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
     </ion-list>
+
+  <ion-button fill="solid" (click)="login()">Login</ion-button>
+  <ion-button fill="solid" color="light" (click)="goRegister()">Register</ion-button>
+  <!--<ion-button fill="solid" color="light" [routerLink]="'/register'" routerDirection="forward">Register</ion-button>-->
+
 </ion-content>
