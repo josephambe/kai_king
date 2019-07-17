@@ -35,43 +35,44 @@ export class RegisterPage implements OnInit {
     console.log('ionViewDidLoad Register Page');
   }
 
-  register() {
-      console.log('Username: ' + this.newUser.username);
-      console.log('Password: ' + this.newUser.password);
-      console.log('Repassword: ' + this.repassword);
-
-
-      if (this.newUser.username && this.newUser.password && this.repassword) {
-          alert('Welcome to Kai King ' + this.newUser.username + '!');
-      } else {
-          alert('Please fill in all fields');
-      }
-  }
-
-   async checkInput() {
-
-       /**TO DO: Make sure duplicate emails and usernames aren't allowed**/
-       if (this.newUser.username && this.newUser.password && this.repassword) {
-           const loading = await this.loadingController.create({
-               message: 'Welcoming you to the whanau'
-           });
-           await loading.present();
-
-           if (!this.userID) {
-               this.loginService.addUser(this.newUser).then(() => {
-                   loading.dismiss();
-                   this.nav.navigateBack('tabs/tab1');
-               });
-           } else {
-               this.loginService.updateUser(this.newUser, this.userID).then(() => {
-                   loading.dismiss();
-                   this.nav.navigateBack('tabs/tab1');
-               });
-           }
+   async register() {
+       if (this.inputFieldsFilled()) {
+           this.addToDatabase();
        } else {
            alert('Please fill in all fields');
        }
-
   }
+
+  inputFieldsFilled() {
+      return (this.newUser.username && this.newUser.password && this.repassword);
+  }
+
+  async addToDatabase() {
+      const popUpMessage = await this.loadingController.create({
+          message: 'Welcoming you to the whanau'
+      });
+      await popUpMessage.present();
+
+      if (!this.userID) {
+          this.addNewUser(popUpMessage);
+      } else {
+          this.updateCurrentUser(popUpMessage);
+      }
+  }
+
+  addNewUser(message) {
+      this.loginService.addUser(this.newUser).then(() => {
+          message.dismiss();
+          this.nav.navigateBack('tabs/tab1');
+      });
+  }
+
+  updateCurrentUser(message) {
+      this.loginService.updateUser(this.newUser, this.userID).then(() => {
+          message.dismiss();
+          this.nav.navigateBack('tabs/tab1');
+      });
+  }
+
 
 }
