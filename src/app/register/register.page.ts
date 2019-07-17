@@ -36,15 +36,28 @@ export class RegisterPage implements OnInit {
   }
 
    async register() {
-       if (this.inputFieldsFilled()) {
+       if (this.passesInputChecks()) {
            this.addToDatabase();
        } else {
-           alert('Please fill in all fields');
+           this.displayAlert();
        }
+  }
+
+  passesInputChecks() {
+      return this.inputFieldsFilled() && this.passwordsMatch();
   }
 
   inputFieldsFilled() {
       return (this.newUser.username && this.newUser.password && this.repassword);
+  }
+
+  passwordsMatch() {
+      return (this.newUser.password === this.repassword);
+  }
+
+  displayAlert() {
+      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); }
+      else if ( !this.passwordsMatch()) { alert('Passwords do not match'); }
   }
 
   async addToDatabase() {
