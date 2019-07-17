@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
+import {UserInfo} from '../services/login-service.service';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tab1',
@@ -8,13 +10,16 @@ import { NavController} from '@ionic/angular';
 })
 export class Tab1Page {
 
-  username: string;
-  password: string;
-  constructor(public navCtrl: NavController) {}
+    currentUser: UserInfo = {
+        username: '',
+        password: ''
+    };
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth) {}
 
   login() {
-    console.log("Username: " + this.username);
-    console.log("Password: " + this.password);
+    console.log("Username: " + this.currentUser.username);
+    console.log("Password: " + this.currentUser.password);
+    //this.afAuth.auth.
 
   }
 

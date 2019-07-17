@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { UserInfo, LoginService } from './../services/login-service.service';
 import {register} from 'ts-node';
+import {AngularFireAuth} from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,7 @@ import {register} from 'ts-node';
 })
 
 export class RegisterPage implements OnInit {
+
     repassword: string;
     newUser: UserInfo = {
         username: '',
@@ -25,7 +28,8 @@ export class RegisterPage implements OnInit {
   constructor(private route: ActivatedRoute,
               private nav: NavController,
               private loadingController: LoadingController,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private afAuth: AngularFireAuth) {
   }
 
   ngOnInit() {
@@ -73,12 +77,19 @@ export class RegisterPage implements OnInit {
       }
   }
 
-  addNewUser(message) {
-      this.loginService.addUser(this.newUser).then(() => {
+  async addNewUser(message) {
+      // this.loginService.addUser(this.newUser).then(() => {
+      try {
+          const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.newUser.username, this.newUser.password);
+          console.log(this.newUser.username, this.newUser.password);
           message.dismiss();
           this.nav.navigateBack('tabs/tab1');
-      });
+      } catch (e) {
+          message.dismiss();
+          alert(e);
+      }
   }
+
 
   updateCurrentUser(message) {
       this.loginService.updateUser(this.newUser, this.userID).then(() => {

@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { environment } from '../environments/environment'
 
 
@@ -19,7 +21,8 @@ import { environment } from '../environments/environment'
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
       AngularFirestoreModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig)],
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule],
   providers: [
     StatusBar,
     SplashScreen,
