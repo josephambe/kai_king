@@ -16,15 +16,31 @@ export class Tab1Page {
     };
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth) {}
 
-  login() {
+  async login() {
     console.log("Username: " + this.currentUser.username);
     console.log("Password: " + this.currentUser.password);
-    //this.afAuth.auth.
+    try {
+        await this.afAuth.auth.signInWithEmailAndPassword(this.currentUser.username, this.currentUser.password);
+    } catch (e) {
+        alert(e);
+    }
 
   }
 
-  goRegister() {
+  register() {
     this.navCtrl.navigateForward('/register');
   }
+
+    resetPassword() {
+        this.navCtrl.navigateForward('/reset-password');
+    }
+
+
+      // if (email) {
+      //     return this.afAuth.auth.sendPasswordResetEmail(email);
+      // } else {
+      //     alert('Please enter your username');
+      // }
+
 
 }

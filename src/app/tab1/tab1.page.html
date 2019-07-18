@@ -10,7 +10,7 @@
   <ion-title>Kai King</ion-title>
     <ion-list>
       <ion-item>
-        <ion-input placeholder="Username" [(ngModel)]="currentUser.name"></ion-input>
+        <ion-input placeholder="Username" [(ngModel)]="currentUser.username"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input placeholder="Password" type="password" [(ngModel)]="currentUser.password"></ion-input>
@@ -18,7 +18,9 @@
     </ion-list>
 
   <ion-button fill="solid" (click)="login(currentUser)">Login</ion-button>
-  <ion-button fill="solid" color="light" (click)="goRegister()">Register</ion-button>
+  <ion-button fill="solid" color="light" (click)="register()">Register</ion-button>
+  <ion-button fill="solid" color="light" (click)="resetPassword()">Forgotten Password</ion-button>
+
   <!--<ion-button fill="solid" color="light" [routerLink]="'/register'" routerDirection="forward">Register</ion-button>-->
 
 </ion-content>

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { UserInfo, LoginService } from './../services/login-service.service';
 import {register} from 'ts-node';
 import {AngularFireAuth} from '@angular/fire/auth';
-
+import Timeout from 'await-timeout';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +39,7 @@ export class RegisterPage implements OnInit {
 
    async register() {
        if (this.passesInputChecks()) {
-           this.addToDatabase();
+           this.addNewUser();
        } else {
            this.displayAlert();
        }
@@ -64,39 +62,33 @@ export class RegisterPage implements OnInit {
       else if ( !this.passwordsMatch()) { alert('Passwords do not match'); }
   }
 
-  async addToDatabase() {
+    async addNewUser() {
+        try {
+            await this.afAuth.auth.createUserWithEmailAndPassword(this.newUser.username, this.newUser.password);
+            this.welcomeUser();
+        } catch (e) {
+            alert(e);
+        }
+
+    }
+
+  async welcomeUser() {
       const popUpMessage = await this.loadingController.create({
           message: 'Welcoming you to the whanau'
       });
       await popUpMessage.present();
-
-      if (!this.userID) {
-          this.addNewUser(popUpMessage);
-      } else {
-          this.updateCurrentUser(popUpMessage);
-      }
+      await Timeout.set(3000);
+      popUpMessage.dismiss();
+      this.nav.navigateBack('tabs/tab1');
   }
 
-  async addNewUser(message) {
-      // this.loginService.addUser(this.newUser).then(() => {
-      try {
-          const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.newUser.username, this.newUser.password);
-          console.log(this.newUser.username, this.newUser.password);
-          message.dismiss();
-          this.nav.navigateBack('tabs/tab1');
-      } catch (e) {
-          message.dismiss();
-          alert(e);
-      }
-  }
-
-
-  updateCurrentUser(message) {
-      this.loginService.updateUser(this.newUser, this.userID).then(() => {
-          message.dismiss();
-          this.nav.navigateBack('tabs/tab1');
-      });
-  }
+    // this.loginService.addUser(this.newUser).then(() => {
+    // updateCurrentUser() {
+  //     this.loginService.updateUser(this.newUser, this.userID).then(() => {
+  //         // message.dismiss();
+  //         this.nav.navigateBack('tabs/tab1');
+  //     });
+  // }
 
 
 }
