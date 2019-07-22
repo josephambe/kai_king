@@ -10,7 +10,6 @@ import Timeout from 'await-timeout';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-
 export class RegisterPage implements OnInit {
 
     repassword: string;
@@ -57,8 +56,11 @@ export class RegisterPage implements OnInit {
   }
 
   displayAlert() {
-      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); }
-      else if ( !this.passwordsMatch()) { alert('Passwords do not match'); }
+      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); } else {
+          if (!this.passwordsMatch()) {
+              alert('Passwords do not match');
+          }
+      }
   }
 
     async addNewUser() {
