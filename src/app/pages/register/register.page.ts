@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { UserInfo, LoginService } from './../services/login-service.service';
-import {register} from 'ts-node';
+import { UserInfo, LoginService } from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Timeout from 'await-timeout';
 

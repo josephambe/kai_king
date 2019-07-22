@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import {UserInfo} from '../services/login-service.service';
+import {UserInfo} from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({

@@ -12,7 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../login-page/login_page.module#LoginPageModule'
+            loadChildren: '../pages/login-page/login_page.module#LoginPageModule'
           }
         ]
       },
@@ -36,14 +36,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '../login-page/login_page.module#LoginPageModule',
+        redirectTo: '../pages/login-page/login_page.module#LoginPageModule',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '../login-page/login_page.module#LoginPageModule',
+    redirectTo: '../pages/login-page/login_page.module#LoginPageModule',
     pathMatch: 'full'
   }
 ];
