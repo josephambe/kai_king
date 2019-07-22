@@ -30,11 +30,6 @@ export class ResetPasswordPage implements OnInit {
           // An error happened.
           alert(error);
       });
-    // if (email) {
-    //     return this.afAuth.auth.sendPasswordResetEmail(email);
-    // } else {
-    //   alert('Please enter an email');
-    // }
   }
 
 }

@@ -79,14 +79,14 @@ export class RegisterPage implements OnInit {
       await popUpMessage.present();
       await Timeout.set(3000);
       popUpMessage.dismiss();
-      this.nav.navigateBack('tabs/tab1');
+      this.nav.navigateBack('tabs/login-page');
   }
 
     // this.loginService.addUser(this.newUser).then(() => {
     // updateCurrentUser() {
   //     this.loginService.updateUser(this.newUser, this.userID).then(() => {
   //         // message.dismiss();
-  //         this.nav.navigateBack('tabs/tab1');
+  //         this.nav.navigateBack('tabs/login-page');
   //     });
   // }
 
