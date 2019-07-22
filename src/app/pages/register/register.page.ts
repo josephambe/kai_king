@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { UserInfo, LoginService } from './../services/login-service.service';
-import {register} from 'ts-node';
+import { UserInfo, LoginService } from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Timeout from 'await-timeout';
 
@@ -11,7 +10,6 @@ import Timeout from 'await-timeout';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-
 export class RegisterPage implements OnInit {
 
     repassword: string;
@@ -58,8 +56,11 @@ export class RegisterPage implements OnInit {
   }
 
   displayAlert() {
-      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); }
-      else if ( !this.passwordsMatch()) { alert('Passwords do not match'); }
+      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); } else {
+          if (!this.passwordsMatch()) {
+              alert('Passwords do not match');
+          }
+      }
   }
 
     async addNewUser() {

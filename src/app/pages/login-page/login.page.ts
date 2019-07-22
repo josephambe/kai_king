@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from '@ionic/angular';
-import {UserInfo} from '../services/login-service.service';
+import {UserInfo} from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
@@ -17,8 +17,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController, private afAuth: AngularFireAuth) {}
 
   async login() {
-    console.log("Username: " + this.currentUser.username);
-    console.log("Password: " + this.currentUser.password);
+    console.log('Username: ' + this.currentUser.username);
+    console.log('Password: ' + this.currentUser.password);
     try {
         await this.afAuth.auth.signInWithEmailAndPassword(this.currentUser.username, this.currentUser.password);
     } catch (e) {
