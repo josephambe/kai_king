@@ -6,6 +6,10 @@ const routes: Routes = [
   // { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'reset-password', loadChildren: './pages/reset-password/reset-password.module#ResetPasswordPageModule' },
+  { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  { path: 'feed', loadChildren: './pages/feed/feed.module#FeedPageModule' },
+  { path: 'uploader', loadChildren: './pages/uploader/uploader.module#UploaderPageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
 ];
 @NgModule({
   imports: [

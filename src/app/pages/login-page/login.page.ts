@@ -3,6 +3,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 import {UserInfo} from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Timeout from 'await-timeout';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +18,8 @@ export class LoginPage {
     };
   constructor(public navCtrl: NavController,
               private afAuth: AngularFireAuth,
-              private loadingController: LoadingController) {}
+              private loadingController: LoadingController,
+              public router: Router) {}
 
   async login() {
     console.log('Username: ' + this.currentUser.username);
@@ -25,6 +27,7 @@ export class LoginPage {
     try {
         await this.afAuth.auth.signInWithEmailAndPassword(this.currentUser.username, this.currentUser.password);
         this.welcomeMessage();
+        this.router.navigate(['/tabs']);
     } catch (e) {
         alert(e);
     }
