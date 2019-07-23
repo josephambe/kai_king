@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController} from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import {UserInfo} from '../../services/login-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import Timeout from 'await-timeout';
 
 @Component({
   selector: 'app-tab1',
@@ -14,13 +15,16 @@ export class LoginPage {
         username: '',
         password: ''
     };
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth) {}
+  constructor(public navCtrl: NavController,
+              private afAuth: AngularFireAuth,
+              private loadingController: LoadingController) {}
 
   async login() {
     console.log('Username: ' + this.currentUser.username);
     console.log('Password: ' + this.currentUser.password);
     try {
         await this.afAuth.auth.signInWithEmailAndPassword(this.currentUser.username, this.currentUser.password);
+        this.welcomeMessage();
     } catch (e) {
         alert(e);
     }
@@ -35,12 +39,13 @@ export class LoginPage {
         this.navCtrl.navigateForward('/reset-password');
     }
 
-
-      // if (email) {
-      //     return this.afAuth.auth.sendPasswordResetEmail(email);
-      // } else {
-      //     alert('Please enter your username');
-      // }
-
+    async welcomeMessage() {
+        const popUpMessage = await this.loadingController.create({
+            message: 'Welcome to Kai King!'
+        });
+        await popUpMessage.present();
+        await Timeout.set(3000);
+        popUpMessage.dismiss();
+    }
 
 }
