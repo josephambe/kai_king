@@ -1,3 +1,24 @@
 ion-item {
   --ion-background-color: var(--ion-color-primary-shade);
 }
+
+.title-md {
+  margin-bottom: 5vh;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+ion-item{
+  --ion-background-color:var(--ion-color-primary-shade);
+  padding-top: 3%;
+  margin-left: 20%;
+  margin-right: 20%;
+
+}
+
+ion-button {
+  margin-top: 50px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
