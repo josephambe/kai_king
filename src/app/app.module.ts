@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
       AngularFirestoreModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireModule.initializeApp(environment),
       AngularFireAuthModule],
   providers: [
     StatusBar,

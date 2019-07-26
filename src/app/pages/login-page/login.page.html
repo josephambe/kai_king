@@ -1,33 +1,50 @@
-<!--<ion-header>-->
-  <!--<ion-toolbar>-->
-    <!--<ion-title text-center="">-->
-      <!--Login Page-->
-    <!--</ion-title>-->
-  <!--</ion-toolbar>-->
-<!--</ion-header>-->
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-</head>
+<form [formGroup]="loginForm">
+    <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input
+                formControlName="email"
+                type="email"
+                placeholder="Your email address"
+                [class.invalid]="!loginForm.controls['email'].valid &&
+      loginForm.controls['email'].touched"
+        >
+        </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!loginForm.controls['email'].valid &&
+       loginForm.controls['email'].touched"
+    >
+        <ion-label>Please enter a valid email address.</ion-label>
+    </ion-item>
 
-<ion-content text-center="">
+    <ion-item>
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input
+                formControlName="password"
+                type="password"
+                placeholder="Your password"
+                [class.invalid]="!loginForm.controls['password'].valid&& loginForm.controls['password'].touched"
+        >
+        </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!loginForm.controls['password'].valid
+      && loginForm.controls['password'].touched"
+    >
+        <ion-label>Your password needs more than 6 characters.</ion-label>
+    </ion-item>
 
-  <img src="../assets/icon/logo.png"/>
-  <ion-title color="text-color">Kai King</ion-title>
+    <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
+        Log In
+    </ion-button>
+</form>
 
-  <ion-list>
-      <ion-item>
-        <ion-input placeholder="Username" [(ngModel)]="currentUser.username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Password" type="password" [(ngModel)]="currentUser.password"></ion-input>
-      </ion-item>
-    </ion-list>
+<ion-button expand="block" fill="clear" routerLink="/register">
+    Create a new account
+</ion-button>
 
-  <ion-button fill="solid" (click)="login(currentUser)">Login</ion-button>
-  <ion-button fill="solid" color="light" (click)="register()">Register</ion-button>
-  <ion-button fill="solid" color="light" (click)="resetPassword()">Forgotten Password</ion-button>
-
-
-  <!--<ion-button fill="solid" color="light" [routerLink]="'/register'" routerDirection="forward">Register</ion-button>-->
-
-</ion-content>
+<ion-button expand="block" fill="clear" routerLink="/reset-password">
+    I forgot my password 🙁
+</ion-button>
