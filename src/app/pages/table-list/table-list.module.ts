@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FeedPage } from './feed.page';
+import { TableListPage } from './table-list.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FeedPage
+    component: TableListPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FeedPage]
+  declarations: [TableListPage]
 })
 export class FeedPageModule {}

@@ -12,7 +12,7 @@ export class TabsPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.tabs.select('feed'); // sets default tab to feed
+    this.tabs.select('table-list'); // sets default tab to table-list
   }
 
 

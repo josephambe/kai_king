@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-feed',
-  templateUrl: './feed.page.html',
-  styleUrls: ['./feed.page.scss'],
+  templateUrl: './table-list.page.html',
+  styleUrls: ['./table-list.page.scss'],
 })
-export class FeedPage implements OnInit {
+export class TableListPage implements OnInit {
 
   constructor() { }
 

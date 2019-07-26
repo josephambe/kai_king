@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { storage, initializeApp } from 'firebase';
 import {environment} from '../../../environments/environment';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FileChooser } from '@ionic-native/file-chooser';
 import * as firebase from 'firebase';
 
 
@@ -45,11 +45,15 @@ export class UploaderPage implements OnInit {
 
           const storageUrl = 'pictures';
 
-          const file = await event.target.files;
+          const file = await event.target.files[0];
+          // const data = await new Response(file).text()
+          console.log(file);
           // this.fileChooser.open()
           //     .then(uri => console.log(uri))
           //     .catch(e => console.log(e));
-          const image = `data:image/jpeg;base64,${file}`;
+          // const image = `data:image/jpeg;base64,${file}`;
+          const image = file.toBase64;
+
           const blob = new Blob([image], { type: 'image/jpeg' });
 
           const storageRef = firebase.storage().ref(storageUrl + file.name);

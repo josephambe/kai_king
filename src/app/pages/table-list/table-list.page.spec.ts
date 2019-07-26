@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedPage } from './feed.page';
+import { TableListPage } from './table-list.page';
 
-describe('FeedPage', () => {
-  let component: FeedPage;
-  let fixture: ComponentFixture<FeedPage>;
+describe('TableListPage', () => {
+  let component: TableListPage;
+  let fixture: ComponentFixture<TableListPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedPage ],
+      declarations: [ TableListPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FeedPage);
+    fixture = TestBed.createComponent(TableListPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
