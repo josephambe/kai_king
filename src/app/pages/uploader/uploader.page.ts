@@ -17,7 +17,7 @@ export class UploaderPage implements OnInit {
     private imageSrc: string;
 
   constructor(private camera: Camera) {
-      initializeApp(environment);
+      // initializeApp(environment);
   }
 
   ngOnInit() {

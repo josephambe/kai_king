@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [TableListPage]
 })
-export class FeedPageModule {}
+export class TableListModule {}
