@@ -6,6 +6,8 @@ import { Platform } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import * as firebase from 'firebase/app';
 import { environment } from '../environments/environment';
+import { Router } from '@angular/router';
+import { AuthService } from './services/user/auth.service';
 
 const { SplashScreen } = Plugins;
 
@@ -14,7 +16,10 @@ const { SplashScreen } = Plugins;
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-    constructor() {
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ) {
         this.initializeApp();
     }
 
@@ -23,6 +28,7 @@ export class AppComponent {
         SplashScreen.hide().catch(error => {
             console.error(error);
         });
+
 
         // StatusBar.hide().catch(error => {
         //     console.error(error);

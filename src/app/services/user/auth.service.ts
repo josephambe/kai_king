@@ -13,7 +13,7 @@ export class AuthService {
     // Send a password reset email
     // Logout from the app
 
-  constructor() { }
+    constructor() { }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
       return firebase.auth().signInWithEmailAndPassword(email, password);
@@ -44,5 +44,7 @@ export class AuthService {
   logoutUser(): Promise<void> {
       return firebase.auth().signOut();
   }
+
+
 
 }
