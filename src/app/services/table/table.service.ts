@@ -13,15 +13,21 @@ export class TableService {
     // get a particular table from the list
 
   public tableListRef: firebase.firestore.CollectionReference;
+  public currentUser: firebase.User;
+
 
   constructor() {
-      firebase.auth().onAuthStateChanged(user => {
-          if (user) {
-              this.tableListRef = firebase
-                  .firestore()
-                  .collection(`/userProfile/${user.uid}/tableList`);
-          }
-      });
+
+    this.currentUser = firebase.auth().currentUser;
+    this.tableListRef = firebase.firestore().collection(`/userProfile/${this.currentUser.uid}/tableList`);
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            this.tableListRef = firebase
+                .firestore()
+                .collection(`/userProfile/${user.uid}/tableList`);
+        }
+    });
   }
 
   createTable(

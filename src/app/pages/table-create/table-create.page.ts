@@ -31,7 +31,7 @@ export class TableCreatePage implements OnInit {
         this.tableService
             .createTable(tableName, tableDate, tablePrice, tableCost)
             .then(() => {
-                this.router.navigateByUrl('');
+                this.router.navigateByUrl('tabs/table-list');
             });
     }
 
