@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
-import { UserInfo, LoginService } from '../../services/login-service.service';
-import {AngularFireAuth} from '@angular/fire/auth';
-import Timeout from 'await-timeout';
+import { AuthService } from '../../services/user/auth.service';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,84 +11,60 @@ import Timeout from 'await-timeout';
 })
 export class RegisterPage implements OnInit {
 
-    repassword: string;
-    newUser: UserInfo = {
-        username: '',
-        password: ''
-    };
-
-    userID = null;
+    public signupForm: FormGroup;
+    public loading: any;
 
 
-  constructor(private route: ActivatedRoute,
-              private nav: NavController,
-              private loadingController: LoadingController,
-              private loginService: LoginService,
-              private afAuth: AngularFireAuth) {
-  }
+    constructor(
+        private authService: AuthService,
+        private loadingCtrl: LoadingController,
+        private alertCtrl: AlertController,
+        private formBuilder: FormBuilder,
+        private router: Router
+    ) {
+        this.signupForm = this.formBuilder.group({
+            email: [
+                '',
+                Validators.compose([Validators.required, Validators.email]),
+            ],
+            password: [
+                '',
+                Validators.compose([Validators.minLength(6), Validators.required]),
+            ],
+        });
+    }
 
   ngOnInit() {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Register Page');
-  }
+    async signupUser(signupForm: FormGroup): Promise<void> {
+        if (!signupForm.valid) {
+            console.log(
+                'Need to complete the form, current value: ', signupForm.value
+            );
+        } else {
+            const email: string = signupForm.value.email;
+            const password: string = signupForm.value.password;
 
-   async register() {
-       if (this.passesInputChecks()) {
-           this.addNewUser();
-       } else {
-           this.displayAlert();
-       }
-  }
-
-  passesInputChecks() {
-      return this.inputFieldsFilled() && this.passwordsMatch();
-  }
-
-  inputFieldsFilled() {
-      return (this.newUser.username && this.newUser.password && this.repassword);
-  }
-
-  passwordsMatch() {
-      return (this.newUser.password === this.repassword);
-  }
-
-  displayAlert() {
-      if ( !this.inputFieldsFilled()) { alert('Please fill in all fields'); } else {
-          if (!this.passwordsMatch()) {
-              alert('Passwords do not match');
-          }
-      }
-  }
-
-    async addNewUser() {
-        try {
-            await this.afAuth.auth.createUserWithEmailAndPassword(this.newUser.username, this.newUser.password);
-            this.welcomeUser();
-        } catch (e) {
-            alert(e);
+            this.authService.signupUser(email, password).then(
+                () => {
+                    this.loading.dismiss().then(() => {
+                        this.router.navigateByUrl('home');
+                    });
+                },
+                error => {
+                    this.loading.dismiss().then(async () => {
+                        const alert = await this.alertCtrl.create({
+                            message: error.message,
+                            buttons: [{ text: 'Ok', role: 'cancel' }],
+                        });
+                        await alert.present();
+                    });
+                }
+            );
+            this.loading = await this.loadingCtrl.create();
+            await this.loading.present();
         }
-
     }
-
-  async welcomeUser() {
-      const popUpMessage = await this.loadingController.create({
-          message: 'Welcoming you to the whanau'
-      });
-      await popUpMessage.present();
-      await Timeout.set(3000);
-      popUpMessage.dismiss();
-      this.nav.navigateBack('tabs/login-page');
-  }
-
-    // this.loginService.addUser(this.newUser).then(() => {
-    // updateCurrentUser() {
-  //     this.loginService.updateUser(this.newUser, this.userID).then(() => {
-  //         // message.dismiss();
-  //         this.nav.navigateBack('tabs/login-page');
-  //     });
-  // }
-
 
 }

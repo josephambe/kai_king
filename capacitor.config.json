@@ -1,0 +1,7 @@
+{
+  "appId": "com.amber.kaiKing",
+  "appName": "kaiKing",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

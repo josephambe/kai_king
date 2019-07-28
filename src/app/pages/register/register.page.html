@@ -1,33 +1,56 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref='tabs'></ion-back-button>
+      <ion-back-button defaultHref="/login"></ion-back-button>
     </ion-buttons>
-    <ion-title>register</ion-title>
+
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-  <ion-title text-center="">Join our whanau!</ion-title>
-  <ion-list>
+  <form [formGroup]="signupForm">
     <ion-item>
-      <ion-input placeholder="Username" [(ngModel)]="newUser.username"></ion-input>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input
+              formControlName="email"
+              type="email"
+              placeholder="Your email address"
+              [class.invalid]="!signupForm.controls['email'].valid && signupForm.controls['email'].touched"
+      >
+      </ion-input>
     </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!signupForm.controls['email'].valid
+      && signupForm.controls['email'].touched"
+    >
+      <ion-label>Please enter a valid email.</ion-label>
+    </ion-item>
+
     <ion-item>
-      <ion-input placeholder="Password" type="password" [(ngModel)]="newUser.password"></ion-input>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input
+              formControlName="password"
+              type="password"
+              placeholder="Your password"
+              [class.invalid]="!signupForm.controls['password'].valid && signupForm.controls['password'].touched"
+      >
+      </ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input placeholder="Repeat Password" type="password" [(ngModel)]="repassword"></ion-input>
+    <ion-item
+            class="error-message"
+            *ngIf="!signupForm.controls['password'].valid  &&
+      signupForm.controls['password'].touched"
+    >
+      <ion-label>Your password needs more than 6 characters.</ion-label>
     </ion-item>
-  </ion-list>
 
-  <ion-button fill="solid" (click)="register()">Register</ion-button>
-
-
-
-
-
+    <ion-button
+            expand="block"
+            (click)="signupUser(signupForm)"
+            [disabled]="!signupForm.valid"
+    >
+      Create an Account
+    </ion-button>
+  </form>
 </ion-content>
-
-
