@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TableDetailPage implements OnInit {
 
     public currentTable: any = {};
-
+    public guestName = '';
 
     constructor(
         private tableService: TableService,
@@ -26,6 +26,16 @@ export class TableDetailPage implements OnInit {
               this.currentTable = tableSnapshot.data();
               this.currentTable.id = tableSnapshot.id;
           });
+  }
+
+  addGuest(guestName: string): void {
+      this.tableService
+          .addGuest(
+              guestName,
+              this.currentTable.id,
+              this.currentTable.price,
+          )
+          .then(() => this.guestName = '' );
   }
 
 }

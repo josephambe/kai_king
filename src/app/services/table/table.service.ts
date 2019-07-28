@@ -52,4 +52,19 @@ export class TableService {
   getTableDetail(tableId: string): firebase.firestore.DocumentReference {
       return this.tableListRef.doc(tableId);
   }
+
+    addGuest(guestName: string, tableId: string, tablePrice: number): Promise<void> {
+        return this.tableListRef
+            .doc(tableId)
+            .collection('guestList')
+            .add({ guestName })
+            .then(() => {
+                return firebase.firestore().runTransaction(transaction => {
+                    return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
+                        const newRevenue = eventDoc.data().revenue + tablePrice;
+                        transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
+                    });
+                });
+            });
+    }
 }
