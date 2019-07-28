@@ -1,9 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>table-detail</ion-title>
+    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-title>{{currentTable?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <p>Ticket: <strong>${{currentTable?.price}}</strong></p>
+      <p>Date: <strong>{{currentTable?.date}}</strong></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

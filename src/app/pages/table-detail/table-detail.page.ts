@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TableService } from '../../services/table/table.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-table-detail',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableDetailPage implements OnInit {
 
-  constructor() { }
+    public currentTable: any = {};
+
+
+    constructor(
+        private tableService: TableService,
+        private route: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
+      const tableId: string = this.route.snapshot.paramMap.get('id');
+      this.tableService
+          .getTableDetail(tableId)
+          .get()
+          .then(tableSnapshot => {
+              this.currentTable = tableSnapshot.data();
+              this.currentTable.id = tableSnapshot.id;
+          });
   }
 
 }
