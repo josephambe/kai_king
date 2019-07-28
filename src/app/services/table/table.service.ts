@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -53,18 +54,36 @@ export class TableService {
       return this.tableListRef.doc(tableId);
   }
 
-    addGuest(guestName: string, tableId: string, tablePrice: number): Promise<void> {
+    addGuest(guestName: string, tableId: string, tablePrice: number, guestPicture: string = null): Promise<void> {
         return this.tableListRef
             .doc(tableId)
             .collection('guestList')
             .add({ guestName })
-            .then(() => {
+            .then((newGuest) => {
                 return firebase.firestore().runTransaction(transaction => {
                     return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
                         const newRevenue = eventDoc.data().revenue + tablePrice;
                         transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
                     });
                 });
+
+                if (guestPicture != null) {
+                    const storageRef = firebase
+                        .storage()
+                        .ref(`/guestProfile/${newGuest.id}/profilePicture.png`);
+
+                    return storageRef
+                        .putString(guestPicture, 'base64', {contentType: 'image/png'})
+                        .then(() => {
+                            return storageRef.getDownloadURL().then(downloadURL => {
+                                return this.tableListRef
+                                    .doc(tableId)
+                                    .collection('guestList')
+                                    .doc(newGuest.id)
+                                    .update({profilePicture: downloadURL});
+                            });
+                        });
+                }
             });
     }
 }

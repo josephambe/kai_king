@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from '../../services/table/table.service';
 import { ActivatedRoute } from '@angular/router';
+import { Plugins, CameraResultType } from '@capacitor/core';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-table-detail',
@@ -11,6 +13,8 @@ export class TableDetailPage implements OnInit {
 
     public currentTable: any = {};
     public guestName = '';
+    public guestPicture: string = null;
+
 
     constructor(
         private tableService: TableService,
@@ -34,8 +38,25 @@ export class TableDetailPage implements OnInit {
               guestName,
               this.currentTable.id,
               this.currentTable.price,
+              this.guestPicture
           )
-          .then(() => this.guestName = '' );
+          .then(() => {
+              this.guestName = '';
+              this.guestPicture = null;
+          });
+  }
+
+  async takePicture(): Promise<void> {
+      try {
+          const profilePicture = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+          });
+          this.guestPicture = profilePicture.base64String; // In tutorial, they use base64Data instead of String
+      } catch (error) {
+          console.error(error);
+      }
   }
 
 }
