@@ -18,6 +18,8 @@ export class ProfileService {
   public currentUser: firebase.User;
 
   constructor() {
+      this.currentUser = firebase.auth().currentUser;
+      this.userProfile = firebase.firestore().doc(`/userProfile/${this.currentUser.uid}`);
       firebase.auth().onAuthStateChanged(user => {
           if (user) {
               this.currentUser = user;
