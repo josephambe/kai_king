@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TableService } from '../../services/table/table.service';
+import { ActivatedRoute } from '@angular/router';
+import { Plugins, CameraResultType } from '@capacitor/core';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-table-detail',
@@ -7,9 +11,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableDetailPage implements OnInit {
 
-  constructor() { }
+    public currentTable: any = {};
+    public guestName = '';
+    public guestPicture: string = null;
+
+
+    constructor(
+        private tableService: TableService,
+        private route: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
+      const tableId: string = this.route.snapshot.paramMap.get('id');
+      this.tableService
+          .getTableDetail(tableId)
+          .get()
+          .then(tableSnapshot => {
+              this.currentTable = tableSnapshot.data();
+              this.currentTable.id = tableSnapshot.id;
+          });
+  }
+
+  addGuest(guestName: string): void {
+      this.tableService
+          .addGuest(
+              guestName,
+              this.currentTable.id,
+              this.currentTable.price,
+              this.guestPicture
+          )
+          .then(() => {
+              this.guestName = '';
+              this.guestPicture = null;
+          });
+  }
+
+  async takePicture(): Promise<void> {
+      try {
+          const profilePicture = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.Base64,
+          });
+          this.guestPicture = profilePicture.base64String; // In tutorial, they use base64Data instead of String
+      } catch (error) {
+          console.error(error);
+      }
   }
 
 }

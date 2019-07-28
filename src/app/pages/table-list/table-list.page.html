@@ -1,11 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Table List</ion-title>
+    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
+    <ion-title>Your Tables</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-button (click)="logoutUser()">
-    Logout
+
+  <ion-list>
+    <ion-list-header> <ion-label>Your Tables</ion-label> </ion-list-header>
+    <ion-item
+            tappable
+            *ngFor="let table of tableList"
+            routerLink="/table-detail/{{ table.id }}"
+    >
+      <ion-label>
+        <h2>{{table?.name}}</h2>
+        <p>Ticket: <strong>${{table?.price}}</strong></p>
+        <p>Date: <strong>{{table?.date}}</strong></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" routerLink="/table-create">
+    Create a new Table
   </ion-button>
+
+  <!--<ion-button expand="block" color="primary" routerLink="/table-list">-->
+    <!--See your events-->
+  <!--</ion-button>-->
 </ion-content>
+
