@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from '../../services/table/table.service';
 import { ActivatedRoute } from '@angular/router';
-import { Plugins, CameraResultType } from '@capacitor/core';
+import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 const { Camera } = Plugins;
 
 @Component({
@@ -14,11 +15,14 @@ export class TableDetailPage implements OnInit {
     public currentTable: any = {};
     public guestName = '';
     public guestPicture: string = null;
+    photo: SafeResourceUrl;
+
 
 
     constructor(
         private tableService: TableService,
         private route: ActivatedRoute,
+        private sanitizer: DomSanitizer
     ) { }
 
   ngOnInit() {
@@ -47,21 +51,25 @@ export class TableDetailPage implements OnInit {
   }
 
   async takePicture(): Promise<void> {
-      try {
+      const image = await Plugins.Camera.getPhoto({
+          quality: 100,
+          allowEditing: false,
+          resultType: CameraResultType.DataUrl,
+          source: CameraSource.Camera
+      });
+
+      this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+  }
+      // try {
           // const profilePicture = await Camera.getPhoto({
           //     quality: 90,
           //     allowEditing: false,
           //     resultType: CameraResultType.Base64,
           // });
-          const profilePicture = await Camera.getPhoto({
-              quality: 90,
-              allowEditing: true,
-              resultType: CameraResultType.Base64
-          });
-          this.guestPicture = profilePicture.webPath; // In tutorial, they use base64Data instead of String
-      } catch (error) {
-          console.error(error);
-      }
-  }
+      //     this.guestPicture = profilePicture.webPath; // In tutorial, they use base64Data instead of String
+      // } catch (error) {
+      //     console.error(error);
+      // }
+  //}
 
 }
