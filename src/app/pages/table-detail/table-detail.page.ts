@@ -48,12 +48,17 @@ export class TableDetailPage implements OnInit {
 
   async takePicture(): Promise<void> {
       try {
+          // const profilePicture = await Camera.getPhoto({
+          //     quality: 90,
+          //     allowEditing: false,
+          //     resultType: CameraResultType.Base64,
+          // });
           const profilePicture = await Camera.getPhoto({
               quality: 90,
-              allowEditing: false,
-              resultType: CameraResultType.Base64,
+              allowEditing: true,
+              resultType: CameraResultType.Base64
           });
-          this.guestPicture = profilePicture.base64String; // In tutorial, they use base64Data instead of String
+          this.guestPicture = profilePicture.webPath; // In tutorial, they use base64Data instead of String
       } catch (error) {
           console.error(error);
       }
