@@ -10,8 +10,13 @@
   <img [src]="photo" >
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="takePicture()">
+    <ion-fab-button (click)="takePicture(1)">
       <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="takePicture(0)">
+      <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
