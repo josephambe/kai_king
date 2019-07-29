@@ -5,7 +5,8 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
-@import "../assets/scss/normalize";
+
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
