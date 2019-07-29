@@ -1,3 +1,14 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
 <form [formGroup]="loginForm">
     <ion-item>
         <ion-label position="stacked">Email</ion-label>
@@ -39,13 +50,16 @@
     <ion-button (click)="loginUser(loginForm)" expand="block" [disabled]="!loginForm.valid">
         Log In
     </ion-button>
-    <!--<a [routerLink]="['/tabs']">Go to dashboard</a>-->
+    <a [routerLink]="['/tabs']">Go to dashboard</a>
 </form>
 
-<ion-button expand="block" fill="clear" routerLink="/register">
-    Create a new account
-</ion-button>
 
-<ion-button expand="block" fill="clear" routerLink="/reset-password">
-    I forgot my password 🙁
-</ion-button>
+</ion-content>
+
+<!--<ion-button expand="block" fill="clear" routerLink="/register">-->
+    <!--Create a new account-->
+<!--</ion-button>-->
+
+<!--<ion-button expand="block" fill="clear" routerLink="/reset-password">-->
+    <!--I forgot my password 🙁-->
+<!--</ion-button>-->

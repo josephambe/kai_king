@@ -38,6 +38,7 @@
     "cordova-plugin-telerik-imagepicker": "^2.3.3",
     "core-js": "^2.5.4",
     "firebase": "^6.3.0",
+    "normalize.css": "^8.0.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "uploader": "0.0.3-3",
