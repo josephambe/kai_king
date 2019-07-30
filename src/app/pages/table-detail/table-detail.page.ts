@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from '../../services/table/table.service';
 import { ActivatedRoute } from '@angular/router';
-import { Plugins, CameraResultType } from '@capacitor/core';
-const { Camera } = Plugins;
+// import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+// const { Camera } = Plugins;
+
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-table-detail',
@@ -14,11 +17,16 @@ export class TableDetailPage implements OnInit {
     public currentTable: any = {};
     public guestName = '';
     public guestPicture: string = null;
+    photo: SafeResourceUrl;
+    currentImage: any;
+
 
 
     constructor(
         private tableService: TableService,
         private route: ActivatedRoute,
+        private sanitizer: DomSanitizer,
+        private camera: Camera,
     ) { }
 
   ngOnInit() {
@@ -46,22 +54,77 @@ export class TableDetailPage implements OnInit {
           });
   }
 
-  async takePicture(): Promise<void> {
-      try {
+  // take Photo
+  takePicture(sourceType: number) {
+      const options: CameraOptions = {
+          quality: 50,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          sourceType,
+      }
+
+      this.camera.getPicture(options).then((imageData) => {
+          // const base64Image = 'data:image/jpeg;base64,' + imageData;
+          // this.guestPicture = 'data:image/jpeg;base64,' + imageData;
+          this.guestPicture = imageData;
+          this.photo = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+          // Handle error
+      });
+  }
+
+    // async takePicture(): Promise<void> {
+
+      // WORKS FOR TAKING PHOTOS
+      // const options: CameraOptions = {
+      //     quality: 100,
+      //     destinationType: this.camera.DestinationType.DATA_URL,
+      //     encodingType: this.camera.EncodingType.JPEG,
+      //     mediaType: this.camera.MediaType.PICTURE
+      // }
+      //
+      // this.camera.getPicture(options).then((imageData) => {
+      //     this.currentImage = 'data:image/jpeg;base64,' + imageData;
+      // }, (err) => {
+      //     // Handle error
+      //     console.log("Camera issue:" + err);
+      // });
+
+      // WORKS FOR BROWSER
+      // console.log('Say cheese!');
+      //
+      // const image = await Plugins.Camera.getPhoto({
+      //     quality: 100,
+      //     allowEditing: false,
+      //     resultType: CameraResultType.DataUrl,
+      //     source: CameraSource.Camera
+      // });
+      //
+      // console.log('Photo taken');
+      //
+      //
+      // this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
+  // }
+
+
+
+
+
+
+
+
+      // try {
           // const profilePicture = await Camera.getPhoto({
           //     quality: 90,
           //     allowEditing: false,
           //     resultType: CameraResultType.Base64,
           // });
-          const profilePicture = await Camera.getPhoto({
-              quality: 90,
-              allowEditing: true,
-              resultType: CameraResultType.Base64
-          });
-          this.guestPicture = profilePicture.webPath; // In tutorial, they use base64Data instead of String
-      } catch (error) {
-          console.error(error);
-      }
-  }
+      //     this.guestPicture = profilePicture.webPath; // In tutorial, they use base64Data instead of String
+      // } catch (error) {
+      //     console.error(error);
+      // }
+  //}
 
 }
