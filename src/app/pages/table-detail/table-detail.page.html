@@ -7,15 +7,15 @@
 
 <ion-content padding>
 
-  <img [src]="photo" >
+  <img [src]="guestPicture" >
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="takePicture(1)">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-fab vertical="top" horizontal="center" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button (click)="takePicture(0)">
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
@@ -52,11 +52,11 @@
           </ion-item>
         </ion-col>
 
-        <ion-col size="4">
-          <ion-button (click)="takePicture()">
-            <ion-icon slot="icon-only" name="camera"></ion-icon>
-          </ion-button>
-        </ion-col>
+        <!--<ion-col size="4">-->
+          <!--<ion-button (click)="takePicture()">-->
+            <!--<ion-icon slot="icon-only" name="camera"></ion-icon>-->
+          <!--</ion-button>-->
+        <!--</ion-col>-->
       </ion-row>
       <span *ngIf="guestPicture">Picture taken!</span>
 

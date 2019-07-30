@@ -66,7 +66,8 @@ export class TableDetailPage implements OnInit {
       }
 
       this.camera.getPicture(options).then((imageData) => {
-          const base64Image = 'data:image/jpeg;base64,' + imageData;
+          // const base64Image = 'data:image/jpeg;base64,' + imageData;
+          this.guestPicture = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {
           // Handle error
       });
