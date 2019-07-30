@@ -54,26 +54,25 @@ export class TableDetailPage implements OnInit {
           });
   }
 
-  // async takePicture(): Promise<void> {
-
-
-      //take Photo
-      takePicture(sourceType: number) {
-          const options: CameraOptions = {
-              quality: 50,
-              destinationType: this.camera.DestinationType.DATA_URL,
-              encodingType: this.camera.EncodingType.JPEG,
-              mediaType: this.camera.MediaType.PICTURE,
-              correctOrientation: true,
-              sourceType,
-          }
-
-          this.camera.getPicture(options).then((imageData) => {
-              const base64Image = 'data:image/jpeg;base64,' + imageData;
-          }, (err) => {
-              // Handle error
-          });
+  // take Photo
+  takePicture(sourceType: number) {
+      const options: CameraOptions = {
+          quality: 50,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          sourceType,
       }
+
+      this.camera.getPicture(options).then((imageData) => {
+          const base64Image = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+          // Handle error
+      });
+  }
+
+    // async takePicture(): Promise<void> {
 
       // WORKS FOR TAKING PHOTOS
       // const options: CameraOptions = {
