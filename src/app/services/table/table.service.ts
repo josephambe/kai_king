@@ -55,6 +55,13 @@ export class TableService {
   }
 
     addGuest(guestName: string, tableId: string, tablePrice: number, guestPicture: string = null): Promise<void> {
+
+        // const storageRef = firebase.storage().ref('/guestProfile/');
+        //
+        // return storageRef.putString(guestPicture, 'base64').then(function(snapshot) {
+        //     console.log('Uploaded a base64 string!');
+        // });
+
         return this.tableListRef
             .doc(tableId)
             .collection('guestList')
@@ -64,8 +71,8 @@ export class TableService {
 
                     if (guestPicture != null) {
                         const storageRef = firebase
-                            .storage().ref('/guestProfile/');
-                            //.ref('/guestProfile/${newGuest.id}/profilePicture.jpeg');
+                            .storage()
+                            .ref(`/guestProfile/${newGuest.id}/profilePicture.jpeg`);
 
                         return storageRef
                             .putString(guestPicture, 'base64')
@@ -88,6 +95,6 @@ export class TableService {
                 });
 
 
-            });
+           });
     }
 }
