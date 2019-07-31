@@ -11,6 +11,8 @@ const routes: Routes = [
             { path: 'table-list', loadChildren: '../table-list/table-list.module#TableListModule', canActivate: [AuthGuard] },
             { path: 'uploader', loadChildren: '../uploader/uploader.module#UploaderPageModule', canActivate: [AuthGuard] },
             { path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
+            { path: 'edit-image', loadChildren: '../edit-image/edit-image.module#EditImagePageModule', canActivate: [AuthGuard] },
+
         ], canActivate: [AuthGuard]
     }
 

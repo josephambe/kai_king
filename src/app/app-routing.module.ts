@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'table-create', loadChildren: './pages/table-create/table-create.module#TableCreatePageModule', canActivate: [AuthGuard] },
   { path: 'table-detail/:id', loadChildren: './pages/table-detail/table-detail.module#TableDetailPageModule', canActivate: [AuthGuard] },
   { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
+  { path: 'edit-image', loadChildren: './pages/edit-image/edit-image.module#EditImagePageModule' },
 
 ];
 @NgModule({

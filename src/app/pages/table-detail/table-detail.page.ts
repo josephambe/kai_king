@@ -18,7 +18,6 @@ export class TableDetailPage implements OnInit {
     public guestName = '';
     public guestPicture: string = null;
     photo: SafeResourceUrl;
-    currentImage: any;
 
 
 
@@ -66,8 +65,6 @@ export class TableDetailPage implements OnInit {
       }
 
       this.camera.getPicture(options).then((imageData) => {
-          // const base64Image = 'data:image/jpeg;base64,' + imageData;
-          // this.guestPicture = 'data:image/jpeg;base64,' + imageData;
           this.guestPicture = imageData;
           this.photo = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {

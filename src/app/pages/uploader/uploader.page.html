@@ -5,16 +5,19 @@
 <!--</ion-header>-->
 
 <ion-content padding>
-<div class="centerDiv">
-  <ion-text text-center="center">
-    <p>UPLOAD FROM</p>
-  </ion-text>
-  <ion-button class="mainButton" size="small" routerLink="/register">
-    Camera
-  </ion-button>
-  <ion-button class="mainButton" size="small" routerLink="/register">
-    Gallery
-  </ion-button>
-</div>
+
+  <img [src]="photo" >
+
+  <div class="centerDiv">
+    <ion-text text-center="center">
+      <p>UPLOAD FROM</p>
+    </ion-text>
+    <ion-button class="mainButton" size="small" (click)="takePicture(1)">
+      Camera
+    </ion-button>
+    <ion-button class="mainButton" size="small"(click)="takePicture(0)">
+      Gallery
+    </ion-button>
+  </div>
 
 </ion-content>
