@@ -4,8 +4,7 @@ import {environment} from '../../../environments/environment';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {NavigationExtras, Router} from '@angular/router';
-import {EditImagePage} from '../edit-image/edit-image.page';
-// import { NavController } from 'ionic-angular';
+
 
 
 @Component({
@@ -43,9 +42,7 @@ export class UploaderPage implements OnInit {
         this.camera.getPicture(options).then((imageData) => {
             this.guestPicture = imageData;
             this.photo = 'data:image/jpeg;base64,' + imageData;
-            // this.router.navigateByUrl('tabs/edit-image', this.photo);
             this.openDetailsWithState();
-            // this.navCtrl.push(EditImagePage, { image: this.photo });
         }, (err) => {
             // Handle error
         });

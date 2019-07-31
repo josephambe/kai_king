@@ -9,11 +9,19 @@
 
 <ion-content padding>
 
-  <ion-text text-center="center">
-    <p>UPLOAD</p>
-  </ion-text>
-
   <img [src]="photo" >
+
+  <ion-button class="mainButton" size="small"(click)="takePicture(0)">
+    Upload
+  </ion-button>
+
+  <ion-list>
+    <ion-item tappable
+              *ngFor="let table of tableList">
+      <ion-label>{{table.name}}</ion-label>
+      <ion-checkbox slot="end" ></ion-checkbox>
+    </ion-item>
+  </ion-list>
 
 
 </ion-content>

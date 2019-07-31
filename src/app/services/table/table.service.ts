@@ -54,47 +54,41 @@ export class TableService {
       return this.tableListRef.doc(tableId);
   }
 
-    addGuest(guestName: string, tableId: string, tablePrice: number, guestPicture: string = null): Promise<void> {
+  addGuest(guestName: string, tableId: string, tablePrice: number, guestPicture: string = null): Promise<void> {
 
-        // const storageRef = firebase.storage().ref('/guestProfile/');
-        //
-        // return storageRef.putString(guestPicture, 'base64').then(function(snapshot) {
-        //     console.log('Uploaded a base64 string!');
-        // });
+    return this.tableListRef
+        .doc(tableId)
+        .collection('guestList')
+        .add({ guestName })
+        .then((newGuest) => {
+            return firebase.firestore().runTransaction(transaction => {
 
-        return this.tableListRef
-            .doc(tableId)
-            .collection('guestList')
-            .add({ guestName })
-            .then((newGuest) => {
-                return firebase.firestore().runTransaction(transaction => {
+                if (guestPicture != null) {
+                    const storageRef = firebase
+                        .storage()
+                        .ref(`/guestProfile/${newGuest.id}/profilePicture.jpeg`);
 
-                    if (guestPicture != null) {
-                        const storageRef = firebase
-                            .storage()
-                            .ref(`/guestProfile/${newGuest.id}/profilePicture.jpeg`);
-
-                        return storageRef
-                            .putString(guestPicture, 'base64')
-                            .then(() => {
-                                return storageRef.getDownloadURL().then(downloadURL => {
-                                    return this.tableListRef
-                                        .doc(tableId)
-                                        .collection('guestList')
-                                        .doc(newGuest.id)
-                                        .update({ profilePicture: downloadURL });
-                                });
+                    return storageRef
+                        .putString(guestPicture, 'base64')
+                        .then(() => {
+                            return storageRef.getDownloadURL().then(downloadURL => {
+                                return this.tableListRef
+                                    .doc(tableId)
+                                    .collection('guestList')
+                                    .doc(newGuest.id)
+                                    .update({ profilePicture: downloadURL });
                             });
-                    }
+                        });
+                }
 
 
-                    return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
-                        const newRevenue = eventDoc.data().revenue + tablePrice;
-                        transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
-                    });
+                return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
+                    const newRevenue = eventDoc.data().revenue + tablePrice;
+                    transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
                 });
+            });
 
 
-           });
-    }
+       });
+  }
 }
