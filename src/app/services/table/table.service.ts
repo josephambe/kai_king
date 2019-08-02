@@ -106,40 +106,40 @@ export class TableService {
        });
   }
 
-  // addPhoto(tableId: string, chefName: string, picture: string = null, votes: number): Promise<void> {
-  //     return this.tableListRef
-  //         .doc(tableId)
-  //         .collection('postList')
-  //         .add({ chefName })
-  //         .then((newPost) => {
-  //             return firebase.firestore().runTransaction(transaction => {
-  //
-  //                 if (picture != null) {
-  //                     const storageRef = firebase
-  //                         .storage()
-  //                         .ref(`/post/${newPost.id}/picture.jpeg`);
-  //
-  //                     return storageRef
-  //                         .putString(picture, 'base64')
-  //                         .then(() => {
-  //                             return storageRef.getDownloadURL().then(downloadURL => {
-  //                                 return this.tableListRef
-  //                                     .doc(tableId)
-  //                                     .collection('postList')
-  //                                     .doc(newPost.id)
-  //                                     .update({ picture: downloadURL });
-  //                             });
-  //                         });
-  //                 }
-  //
-  //
-  //                 // return transaction.get(this.tableListRef.doc(tableId).collection('postList').doc(newPost.id)).then(eventDoc => {
-  //                 //     const newRanking = eventDoc.data().revenue + votes;
-  //                 //     transaction.update(this.tableListRef.doc(tableId), { revenue: newRanking });
-  //                 // });
-  //             });
-  //
-  //
-  //         });
-  // }
+  addPhoto(photoTitle: string, photoDescription: string, photoTable: string, picture: string = null): Promise<void> {
+      return this.tableListRef
+          .doc(tableId)
+          .collection('postList')
+          .add({ chefName })
+          .then((newPost) => {
+              return firebase.firestore().runTransaction(transaction => {
+
+                  if (picture != null) {
+                      const storageRef = firebase
+                          .storage()
+                          .ref(`/post/${newPost.id}/picture.jpeg`);
+
+                      return storageRef
+                          .putString(picture, 'base64')
+                          .then(() => {
+                              return storageRef.getDownloadURL().then(downloadURL => {
+                                  return this.tableListRef
+                                      .doc(tableId)
+                                      .collection('postList')
+                                      .doc(newPost.id)
+                                      .update({ picture: downloadURL });
+                              });
+                          });
+                  }
+
+
+                  // return transaction.get(this.tableListRef.doc(tableId).collection('postList').doc(newPost.id)).then(eventDoc => {
+                  //     const newRanking = eventDoc.data().revenue + votes;
+                  //     transaction.update(this.tableListRef.doc(tableId), { revenue: newRanking });
+                  // });
+              });
+
+
+          });
+  }
 }

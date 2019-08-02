@@ -14,6 +14,7 @@ export class EditImagePage implements OnInit {
 
     photo: any;
     public tableList: Array<any>;
+    public selected: Array<any>;
 
 
 
@@ -41,6 +42,31 @@ export class EditImagePage implements OnInit {
                     });
                     return false;
                 });
+            });
+    }
+
+    getChanged(table) {
+        console.log(table.name);
+        console.log(table.id);
+    }
+
+    uploadPhoto(
+        photoTitle: string,
+        photoDescription: string,
+        photoTable: string,
+    ): void {
+        // console.log('PHOTO TABLE: ' + photoTable);
+        if (
+            photoTitle === undefined ||
+            photoDescription === undefined ||
+            photoTable === undefined
+        ) {
+            return;
+        }
+        this.tableService
+            .addPhoto(photoTitle, photoDescription, photoTable, this.photo)
+            .then(() => {
+                this.router.navigateByUrl('tabs/profile');
             });
     }
 
