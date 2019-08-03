@@ -82,8 +82,9 @@ export class EditImagePage implements OnInit {
         photoTitle: string,
         photoDescription: string,
         photoTable: Array<any>,
+        votes: 0
     ): void {
-        photoTable = this.getSelectedTables();
+        photoTable = this.selected;
         if (
             photoTitle === undefined ||
             photoDescription === undefined ||
@@ -92,7 +93,7 @@ export class EditImagePage implements OnInit {
             return;
         }
         this.tableService
-            .addPhoto(photoTitle, photoDescription, photoTable, this.photo)
+            .addPhoto(photoTitle, photoDescription, photoTable, this.photo, votes) //NEED TO PASS IN THE PROPER FORMAT FOR THIS TO WORK CORRECLTY AND UPLOAD TO STORAGE
             .then(() => {
                 this.router.navigateByUrl('tabs/profile');
             });
