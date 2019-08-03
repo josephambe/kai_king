@@ -5,7 +5,6 @@ import { TableService } from '../../services/table/table.service';
 import {forEach} from '@angular-devkit/schematics';
 
 
-
 @Component({
   selector: 'app-edit-image',
   templateUrl: './edit-image.page.html',
@@ -13,7 +12,8 @@ import {forEach} from '@angular-devkit/schematics';
 })
 export class EditImagePage implements OnInit {
 
-    photo: any;
+    public photo: string = null;
+    public photoData: string = null;
     public tableList: Array<any>;
     public selected: Array<any> = [];
 
@@ -24,6 +24,7 @@ export class EditImagePage implements OnInit {
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                 this.photo = this.router.getCurrentNavigation().extras.state.photo;
+                this.photoData = this.router.getCurrentNavigation().extras.state.photoData;
             }
         });
     }
@@ -93,7 +94,7 @@ export class EditImagePage implements OnInit {
             return;
         }
         this.tableService
-            .addPhoto(photoTitle, photoDescription, photoTable, this.photo, votes) //NEED TO PASS IN THE PROPER FORMAT FOR THIS TO WORK CORRECLTY AND UPLOAD TO STORAGE
+            .addPhoto(photoTitle, photoDescription, photoTable, this.photoData, votes) //NEED TO PASS IN THE PROPER FORMAT FOR THIS TO WORK CORRECLTY AND UPLOAD TO STORAGE
             .then(() => {
                 this.router.navigateByUrl('tabs/profile');
             });

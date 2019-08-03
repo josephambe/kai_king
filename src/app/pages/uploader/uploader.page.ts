@@ -16,7 +16,7 @@ import {NavigationExtras, Router} from '@angular/router';
 
 export class UploaderPage implements OnInit {
 
-    public guestPicture: string = null;
+    public photoData: string = null;
     photo: SafeResourceUrl;
 
   constructor(
@@ -40,7 +40,7 @@ export class UploaderPage implements OnInit {
         }
 
         this.camera.getPicture(options).then((imageData) => {
-            this.guestPicture = imageData;
+            this.photoData = imageData;
             this.photo = 'data:image/jpeg;base64,' + imageData;
             this.openDetailsWithState();
         }, (err) => {
@@ -51,7 +51,8 @@ export class UploaderPage implements OnInit {
     openDetailsWithState() {
         const navigationExtras: NavigationExtras = {
             state: {
-                photo: this.photo
+                photo: this.photo,
+                photoData: this.photoData
             }
         };
         this.router.navigate(['tabs/edit-image'], navigationExtras);

@@ -12,6 +12,8 @@ export class TableService {
     // create their own tables
     // get a full list of tables
     // get a particular table from the list
+    // add Guests to tables
+    // add photos to tables
 
   public tableListRef: firebase.firestore.CollectionReference;
   public currentUser: firebase.User;
@@ -113,7 +115,7 @@ export class TableService {
           return this.tableListRef
               .doc(table.id)
               .collection('postList')
-              .add({ photoTitle, photoDescription, picture})
+              .add({ photoTitle, photoDescription})
               .then((newPost) => {
                   return firebase.firestore().runTransaction(transaction => {
 
