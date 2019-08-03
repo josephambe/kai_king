@@ -16,20 +16,18 @@ export class TableCreatePage implements OnInit {
 
     createTable(
         tableName: string,
-        tableDate: string,
-        tablePrice: number,
-        tableCost: number
+        tableDescription: string,
+        tableKing: string
     ): void {
         if (
             tableName === undefined ||
-            tableDate === undefined ||
-            tablePrice === undefined ||
-            tableCost === undefined
+            tableDescription === undefined ||
+            tableKing === undefined
         ) {
             return;
         }
         this.tableService
-            .createTable(tableName, tableDate, tablePrice, tableCost)
+            .createTable(tableName, tableDescription, tableKing)
             .then(() => {
                 this.router.navigateByUrl('tabs/table-list');
             });

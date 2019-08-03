@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from '../../services/table/table.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 // import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // const { Camera } = Plugins;
@@ -18,6 +18,7 @@ export class TableDetailPage implements OnInit {
     public guestName = '';
     public guestPicture: string = null;
     photo: SafeResourceUrl;
+    public tablePhotos: Array<any>;
 
 
 
@@ -26,6 +27,7 @@ export class TableDetailPage implements OnInit {
         private route: ActivatedRoute,
         private sanitizer: DomSanitizer,
         private camera: Camera,
+        private router: Router,
     ) { }
 
   ngOnInit() {
@@ -37,6 +39,21 @@ export class TableDetailPage implements OnInit {
               this.currentTable = tableSnapshot.data();
               this.currentTable.id = tableSnapshot.id;
           });
+
+      // this.tableService
+      //     .getTablePhotos(this.currentTable.id)
+      //     .get()
+      //     .then(tableListSnapshot => {
+      //         this.tablePhotos = [];
+      //         tableListSnapshot.forEach(snap => {
+      //             this.tablePhotos.push({
+      //                 photoTitle: snap.data().photoTitle,
+      //                 photoDescription: snap.data().photoDescription,
+      //                 picture: snap.data().picture,
+      //             });
+      //             return false;
+      //         });
+      //     });
   }
 
   addGuest(guestName: string): void {
@@ -44,7 +61,6 @@ export class TableDetailPage implements OnInit {
           .addGuest(
               guestName,
               this.currentTable.id,
-              this.currentTable.price,
               this.guestPicture
           )
           .then(() => {
@@ -52,6 +68,16 @@ export class TableDetailPage implements OnInit {
               this.guestPicture = null;
           });
   }
+
+    goToUploader() {
+        this.router.navigateByUrl('/tabs/uploader');
+    }
+
+    showimage() {
+        this.tableService.getTablePhotos(this.currentTable.id);
+
+
+    }
 
   // take Photo
   takePicture(sourceType: number) {

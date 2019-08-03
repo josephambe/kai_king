@@ -22,8 +22,9 @@ export class TableListPage implements OnInit {
                   this.tableList.push({
                       id: snap.id,
                       name: snap.data().name,
-                      price: snap.data().price,
-                      date: snap.data().date,
+                      description: snap.data().description,
+                      // price: snap.data().price,
+                      // date: snap.data().date,
                   });
                   return false;
               });

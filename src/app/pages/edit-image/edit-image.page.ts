@@ -94,7 +94,7 @@ export class EditImagePage implements OnInit {
             return;
         }
         this.tableService
-            .addPhoto(photoTitle, photoDescription, photoTable, this.photoData, votes) //NEED TO PASS IN THE PROPER FORMAT FOR THIS TO WORK CORRECLTY AND UPLOAD TO STORAGE
+            .addPhoto(photoTitle, photoDescription, photoTable, this.photoData, votes)
             .then(() => {
                 this.router.navigateByUrl('tabs/profile');
             });

@@ -19,40 +19,18 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Price</ion-label>
+    <ion-label position="stacked">Description</ion-label>
     <ion-input
-            [(ngModel)]="tablePrice"
-            type="number"
-            placeholder="How much will guests pay?"
+            [(ngModel)]="tableDescription"
+            type="string"
+            placeholder="How would you describe your table?"
     >
     </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="stacked">Cost</ion-label>
-    <ion-input
-            [(ngModel)]="tableCost"
-            type="number"
-            placeholder="How much are you spending?"
-    >
-    </ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Table Date</ion-label>
-    <ion-datetime
-            [(ngModel)]="tableDate"
-            displayFormat="D MMM, YY"
-            pickerFormat="DD MMM YYYY"
-            min="2017"
-            max="2020-12-31"
-    >
-    </ion-datetime>
   </ion-item>
 
   <ion-button
           expand="block"
-          (click)="createTable(tableName, tableDate, tablePrice, tableCost)"
+          (click)="createTable(tableName, tableDescription, 'tbc')"
   >
     Create Table
   </ion-button>

@@ -6,36 +6,28 @@
 </ion-header>
 
 <ion-content padding>
+<ion-card>
+  <ion-card-content>
+    <p>Description: <strong>{{currentTable?.description}}</strong></p>
+    <p>Members: <strong>{{currentTable?.guestName}}</strong></p>
+      <ion-button shape="round" (click)="goToUploader()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" (click)="goToUploader()">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-button>
+  </ion-card-content>
+</ion-card>
 
-  <img [src]="photo" >
+  <ion-item tappable *ngFor="let photo of tablePhotos">
+          <!--routerLink="/table-detail/{{ table.id }}"-->
+    <ion-label>
+      <h2>{{photo?.photoTitle}}</h2>
+      <p>Description: <strong>{{photo?.photoDescription}}</strong></p>
+      <p> PHOTO: <strong>{{photo?.picture}}</strong></p>
+    </ion-label>
+  </ion-item>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="takePicture(1)">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button (click)="takePicture(0)">
-      <ion-icon name="add-circle-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-  <ion-card>
-    <ion-card-header>
-      Table's Revenue:
-      <span
-        [class.profitable]="currentTable?.revenue > 0"
-        [class.no-profit]="currentTable?.revenue < 0 "
-      >
-      {{currentTable?.revenue | currency}}
-    </span>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Ticket: <strong>${{currentTable?.price}}</strong></p>
-      <p>Date: <strong>{{currentTable?.date}}</strong></p>
-    </ion-card-content>
-  </ion-card>
 
   <ion-card class="add-guest-form">
     <ion-card-header> Add Guests </ion-card-header>
@@ -47,7 +39,7 @@
             <ion-input
                     [(ngModel)]="guestName"
                     type="text"
-                    placeholder="What's your guest's name?"
+                    placeholder=""
             ></ion-input>
           </ion-item>
         </ion-col>
@@ -68,3 +60,4 @@
   </ion-card>
 
 </ion-content>
+

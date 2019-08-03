@@ -33,34 +33,32 @@ export class TableService {
     });
   }
 
-  createTable(
-      tableName: string,
-      tableDate: string,
-      tablePrice: number,
-      tableCost: number
-  ): Promise<firebase.firestore.DocumentReference> {
-      return this.tableListRef.add({
-          name: tableName,
-          date: tableDate,
-          price: tablePrice * 1,
-          cost: tableCost * 1,
-          revenue: tableCost * -1,
-      });
-  }
+  // createTable(
+  //     tableName: string,
+  //     tableDate: string,
+  //     tablePrice: number,
+  //     tableCost: number
+  // ): Promise<firebase.firestore.DocumentReference> {
+  //     return this.tableListRef.add({
+  //         name: tableName,
+  //         date: tableDate,
+  //         price: tablePrice * 1,
+  //         cost: tableCost * 1,
+  //         revenue: tableCost * -1,
+  //     });
+  // }
 
-    // createTable(
-    //     tableName: string,
-    //     tableDate: string,
-    //     tableDescription: number,
-    //     tableKing: string,
-    // ): Promise<firebase.firestore.DocumentReference> {
-    //     return this.tableListRef.add({
-    //         name: tableName,
-    //         date: tableDate,
-    //         description: tableDescription,
-    //         king: tableKing,
-    //     });
-    // }
+    createTable(
+        tableName: string,
+        tableDescription: string,
+        tableKing: string,
+    ): Promise<firebase.firestore.DocumentReference> {
+        return this.tableListRef.add({
+            name: tableName,
+            description: tableDescription,
+            king: tableKing,
+        });
+    }
 
   getTableList(): firebase.firestore.CollectionReference {
       return this.tableListRef;
@@ -70,7 +68,11 @@ export class TableService {
       return this.tableListRef.doc(tableId);
   }
 
-  addGuest(guestName: string, tableId: string, tablePrice: number, guestPicture: string = null): Promise<void> {
+  getTablePhotos(tableId: string): firebase.firestore.CollectionReference {
+      return this.tableListRef.doc(tableId).collection('postList');
+  }
+
+  addGuest(guestName: string, tableId: string, guestPicture: string = null): Promise<void> {
 
     return this.tableListRef
         .doc(tableId)
@@ -98,10 +100,10 @@ export class TableService {
                 }
 
 
-                return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
-                    const newRevenue = eventDoc.data().revenue + tablePrice;
-                    transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
-                });
+                // return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
+                //     const newRevenue = eventDoc.data().revenue + tablePrice;
+                //     transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
+                // });
             });
 
 
