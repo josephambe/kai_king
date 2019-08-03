@@ -12,6 +12,8 @@ const routes: Routes = [
             { path: 'uploader', loadChildren: '../uploader/uploader.module#UploaderPageModule', canActivate: [AuthGuard] },
             { path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
             { path: 'edit-image', loadChildren: '../edit-image/edit-image.module#EditImagePageModule', canActivate: [AuthGuard] },
+            { path: 'profile-settings', loadChildren: '../profile-settings/profile-settings.module#ProfileSettingsPageModule', canActivate: [AuthGuard] },
+
 
         ], canActivate: [AuthGuard]
     }
