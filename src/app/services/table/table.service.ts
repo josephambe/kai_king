@@ -68,22 +68,30 @@ export class TableService {
       return this.tableListRef.doc(tableId);
   }
 
-  // getTablePhotos(tableId: string){
-  //     const storageRef = firebase
-  //         .storage()
-  //         .ref(`/post/${newPost.id}/picture.jpeg`);
+  // getTablePhotos(tableId: string): Promise<void> {
+  //     let table of this.tableListRef{
   //
-  //     return storageRef
-  //         .putString(picture, 'base64')
-  //         .then(() => {
-  //             return storageRef.getDownloadURL().then(downloadURL => {
-  //                 return this.tableListRef
-  //                     .doc(tableId)
-  //                     .collection('postList')
-  //                     .doc(newPost.id)
-  //                     .update({ picture: downloadURL });
+  //     }
+  //         this.tableListRef.get().then( tableSnapshot => {
+  //             tableSnapshot.forEach
+  //         })
+  //         .doc(tableId)
+  //         .collection(`postList`)
+  //         .get()
+  //         .then(tableListSnapshot => {
+  //             this.tablePhotos = [];
+  //             tableListSnapshot.forEach(snap => {
+  //                 this.tablePhotos.push({
+  //                     photoTitle: snap.data().photoTitle,
+  //                     photoDescription: snap.data().photoDescription,
+  //                     picture: snap.data().picture,
+  //                 });
+  //
+  //                 return false;
   //             });
   //         });
+  //         return this.tablePhotos;
+  //
   // }
 
   addGuest(guestName: string, tableId: string, guestPicture: string = null): Promise<void> {

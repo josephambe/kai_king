@@ -20,6 +20,16 @@
 
   <ion-list> <ion-list-header> Your Photos </ion-list-header> </ion-list>
 
+  <ion-item tappable *ngFor="let p of userPhotos">
+    <!--routerLink="/table-detail/{{ table.id }}"-->
+    <ion-label>
+      <h2>{{p?.photoTitle}}</h2>
+      <p>Description: <strong>{{p?.photoDescription}}</strong></p>
+      <p> PHOTO: <strong>{{p?.picture}}</strong></p>
+      <img src='{{p?.picture}}'/>
+    </ion-label>
+  </ion-item>
+
 
 </ion-content>
 
