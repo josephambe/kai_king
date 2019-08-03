@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import { TableService } from '../../services/table/table.service';
+import {forEach} from '@angular-devkit/schematics';
 
 
 
@@ -14,7 +15,7 @@ export class EditImagePage implements OnInit {
 
     photo: any;
     public tableList: Array<any>;
-    public selected: Array<any>;
+    public selected: Array<any> = [];
 
 
 
@@ -45,17 +46,44 @@ export class EditImagePage implements OnInit {
             });
     }
 
-    getChanged(table) {
-        console.log(table.name);
-        console.log(table.id);
+    getChanged(table, photoTable) {
+        // console.log(table.name);
+        // console.log(table.id);
+        // console.log(photoTable);
+        if (photoTable) {
+            this.selected.push(table);
+            console.log('LENGTH: ' + this.selected.length);
+
+        } else {
+            this.removeTableFromSelected(table);
+            console.log('LENGTH: ' + this.selected.length);
+        }
+        for (const t of this.selected) {
+            console.log('NAME: ' + t.name + ' ID: ' + t.id);
+        }
+    }
+
+    removeTableFromSelected(table) {
+        const index: number = this.selected.indexOf(table);
+        if (index !== -1) {
+            this.selected.splice(index, 1);
+        }
+    }
+
+    getSelectedTables() {
+        for (const t of this.selected) {
+            console.log('NAME: ' + t.name + ' ID: ' + t.id);
+            return t.id;
+
+        }
     }
 
     uploadPhoto(
         photoTitle: string,
         photoDescription: string,
-        photoTable: string,
+        photoTable: Array<any>,
     ): void {
-        // console.log('PHOTO TABLE: ' + photoTable);
+        photoTable = this.getSelectedTables();
         if (
             photoTitle === undefined ||
             photoDescription === undefined ||

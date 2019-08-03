@@ -106,11 +106,11 @@ export class TableService {
        });
   }
 
-  addPhoto(photoTitle: string, photoDescription: string, photoTable: string, picture: string = null): Promise<void> {
+  addPhoto(photoTitle: string, photoDescription: string, tableId: Array<any>, picture: string = null): Promise<void> {
       return this.tableListRef
           .doc(tableId)
           .collection('postList')
-          .add({ chefName })
+          .add({ photoTitle })
           .then((newPost) => {
               return firebase.firestore().runTransaction(transaction => {
 
