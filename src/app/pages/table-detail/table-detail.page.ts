@@ -40,20 +40,23 @@ export class TableDetailPage implements OnInit {
               this.currentTable.id = tableSnapshot.id;
           });
 
-      // this.tableService
-      //     .getTablePhotos(this.currentTable.id)
-      //     .get()
-      //     .then(tableListSnapshot => {
-      //         this.tablePhotos = [];
-      //         tableListSnapshot.forEach(snap => {
-      //             this.tablePhotos.push({
-      //                 photoTitle: snap.data().photoTitle,
-      //                 photoDescription: snap.data().photoDescription,
-      //                 picture: snap.data().picture,
-      //             });
-      //             return false;
-      //         });
-      //     });
+      this.tableService
+          .tableListRef
+          .doc(tableId)
+          .collection(`postList`)
+          .get()
+          .then(tableListSnapshot => {
+              this.tablePhotos = [];
+              tableListSnapshot.forEach(snap => {
+                  this.tablePhotos.push({
+                      photoTitle: snap.data().photoTitle,
+                      photoDescription: snap.data().photoDescription,
+                      picture: snap.data().picture,
+                  });
+
+                  return false;
+              });
+          });
   }
 
   addGuest(guestName: string): void {
@@ -73,11 +76,6 @@ export class TableDetailPage implements OnInit {
         this.router.navigateByUrl('/tabs/uploader');
     }
 
-    showimage() {
-        this.tableService.getTablePhotos(this.currentTable.id);
-
-
-    }
 
   // take Photo
   takePicture(sourceType: number) {

@@ -19,14 +19,20 @@
   </ion-card-content>
 </ion-card>
 
-  <ion-item tappable *ngFor="let photo of tablePhotos">
-          <!--routerLink="/table-detail/{{ table.id }}"-->
-    <ion-label>
-      <h2>{{photo?.photoTitle}}</h2>
-      <p>Description: <strong>{{photo?.photoDescription}}</strong></p>
-      <p> PHOTO: <strong>{{photo?.picture}}</strong></p>
-    </ion-label>
-  </ion-item>
+  <ion-card>
+    <ion-card-content>
+      <ion-item tappable *ngFor="let p of tablePhotos">
+        <!--routerLink="/table-detail/{{ table.id }}"-->
+        <ion-label>
+          <h2>{{p?.photoTitle}}</h2>
+          <p>Description: <strong>{{p?.photoDescription}}</strong></p>
+          <p> PHOTO: <strong>{{p?.picture}}</strong></p>
+          <img src='{{p?.picture}}'/>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
 
 
   <ion-card class="add-guest-form">

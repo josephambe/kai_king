@@ -68,9 +68,23 @@ export class TableService {
       return this.tableListRef.doc(tableId);
   }
 
-  getTablePhotos(tableId: string): firebase.firestore.CollectionReference {
-      return this.tableListRef.doc(tableId).collection('postList');
-  }
+  // getTablePhotos(tableId: string){
+  //     const storageRef = firebase
+  //         .storage()
+  //         .ref(`/post/${newPost.id}/picture.jpeg`);
+  //
+  //     return storageRef
+  //         .putString(picture, 'base64')
+  //         .then(() => {
+  //             return storageRef.getDownloadURL().then(downloadURL => {
+  //                 return this.tableListRef
+  //                     .doc(tableId)
+  //                     .collection('postList')
+  //                     .doc(newPost.id)
+  //                     .update({ picture: downloadURL });
+  //             });
+  //         });
+  // }
 
   addGuest(guestName: string, tableId: string, guestPicture: string = null): Promise<void> {
 
