@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/uploader"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Upload Photo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <img [src]="photo" >
+
+  <ion-item>
+    <ion-label position="stacked">Title</ion-label>
+    <ion-input
+            [(ngModel)]="photoTitle"
+            type="text"
+            placeholder="Name your creation!"
+    >
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Description</ion-label>
+    <ion-input
+            [(ngModel)]="photoDescription"
+            type="text"
+            placeholder="Give us a taster"
+    >
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Share With</ion-label>
+    <ion-list>
+      <ion-item tappable *ngFor="let table of tableList">
+        <ion-label>{{table.name}}</ion-label>
+        <ion-checkbox slot="start" [(ngModel)]="photoTable" (ionChange)="getChanged(table, photoTable)"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-item>
+
+
+  <ion-button
+          expand="block"
+          (click)="uploadPhoto(photoTitle, photoDescription, photoTable)"
+  >
+    Upload
+  </ion-button>
+
+</ion-content>
+

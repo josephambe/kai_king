@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../../services/user/auth.service';
 import { ProfileService } from '../../services/user/profile.service';
 import { Router } from '@angular/router';
+import {TableService} from '../../services/table/table.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,24 +12,73 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  public userProfile: any;
-  public birthDate: Date;
+    public userTables: Array<any> = [];
+    public userPhotos: Array<any> = [];
 
-  constructor(
+    constructor(
       private alertCtrl: AlertController,
       private authService: AuthService,
       private profileService: ProfileService,
-      private router: Router
-  ) { }
+      private router: Router,
+      private tableService: TableService,
+
+) { }
 
   ngOnInit() {
-      this.profileService
-          .getUserProfile()
-          .get()
-          .then( userProfileSnapshot => {
-              this.userProfile = userProfileSnapshot.data();
-              this.birthDate = userProfileSnapshot.data().birthDate;
+      this.tableService
+          .tableListRef.get().then( tableSnapshot => {
+          tableSnapshot.forEach(table => {
+              console.log(table.id, ' => ', table.data());
+              this.tableService
+                  .tableListRef
+                  .doc(table.id)
+                  .collection(`postList`)
+                  .get()
+                  .then(tableListSnapshot => {
+                      tableListSnapshot.forEach(snap => {
+                          this.userPhotos.push({
+                              photoTitle: snap.data().photoTitle,
+                              photoDescription: snap.data().photoDescription,
+                              picture: snap.data().picture,
+                          });
+                          console.log(snap.data().photoTitle);
+
+
+                          return false;
+                      });
+                  });
+              // this.userTables.push({
+              //     tableId: table.id,
+              // });
           });
+      });
+
+      // this.userTables.forEach(table => {
+      for(const t of this.userTables) {
+          console.log('testing');
+          this.tableService
+              .tableListRef
+              .doc(t.tableId)
+              .collection(`postList`)
+              .get()
+              .then(tableListSnapshot => {
+                  this.userPhotos = [];
+                  tableListSnapshot.forEach(snap => {
+                      this.userPhotos.push({
+                          photoTitle: snap.data().photoTitle,
+                          photoDescription: snap.data().photoDescription,
+                          picture: snap.data().picture,
+                      });
+                      console.log(snap.data().photoTitle);
+
+
+                      return false;
+                  });
+              });
+      }
+
+
+
   }
 
   logOut(): void {
@@ -37,89 +87,9 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  async updateName(): Promise<void> {
-      const alert = await this.alertCtrl.create({
-          subHeader: 'Your first name & last name',
-          inputs: [
-              {
-                  type: 'text',
-                  name: 'firstName',
-                  placeholder: 'Your first name',
-                  value: this.userProfile.firstName,
-              },
-              {
-                  type: 'text',
-                  name: 'lastName',
-                  placeholder: 'Your last name',
-                  value: this.userProfile.lastName,
-              },
-          ],
-          buttons: [
-              { text: 'Cancel' },
-              {
-                  text: 'Save',
-                  handler: data => {
-                      this.profileService.updateName(data.firstName, data.lastName);
-                  },
-              },
-          ],
-      });
-      await alert.present();
-  }
+    goToSettings() {
+        this.router.navigateByUrl('/tabs/profile-settings');
+    }
 
-  updateDOB(birthDate: string): void {
-      if (birthDate === undefined) {
-          return;
-      }
-      this.profileService.updateDOB(birthDate);
-  }
-
-  async updateEmail(): Promise<void> {
-      const alert = await this.alertCtrl.create({
-          inputs: [
-              { type: 'text', name: 'newEmail', placeholder: 'Your new email' },
-              { name: 'password', placeholder: 'Your password', type: 'password' },
-          ],
-          buttons: [
-              { text: 'Cancel' },
-              {
-                  text: 'Save',
-                  handler: data => {
-                      this.profileService
-                          .updateEmail(data.newEmail, data.password)
-                          .then(() => {
-                              console.log('Email Changed Successfully');
-                          })
-                          .catch(error => {
-                              console.log('ERROR: ' + error.message);
-                          });
-                  },
-              },
-          ],
-      });
-      await alert.present();
-  }
-
-  async updatePassword(): Promise<void> {
-      const alert = await this.alertCtrl.create({
-          inputs: [
-              { name: 'newPassword', placeholder: 'New password', type: 'password' },
-              { name: 'oldPassword', placeholder: 'Old password', type: 'password' },
-          ],
-          buttons: [
-              { text: 'Cancel' },
-              {
-                  text: 'Save',
-                  handler: data => {
-                      this.profileService.updatePassword(
-                          data.newPassword,
-                          data.oldPassword
-                      );
-                  },
-              },
-          ],
-      });
-      await alert.present();
-  }
 
 }

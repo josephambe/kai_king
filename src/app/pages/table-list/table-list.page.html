@@ -12,14 +12,15 @@
     <ion-item
             tappable
             *ngFor="let table of tableList"
-            routerLink="/table-detail/{{ table.id }}"
+            routerLink="/table-detail/{{table.id}}"
     >
       <ion-label>
         <h2>{{table?.name}}</h2>
-        <p>Ticket: <strong>${{table?.price}}</strong></p>
-        <p>Date: <strong>{{table?.date}}</strong></p>
+        <p>Description: <strong>{{table?.description}}</strong></p>
+        <p>Members: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
       </ion-label>
     </ion-item>
+
   </ion-list>
 
   <ion-button expand="block" color="primary" routerLink="/table-create">

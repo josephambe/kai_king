@@ -1,12 +1,21 @@
-<ion-header xmlns="http://www.w3.org/1999/html">
-  <ion-toolbar>
-    <ion-title>Upload Image</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!--<ion-header xmlns="http://www.w3.org/1999/html">-->
+  <!--<ion-toolbar>-->
+    <!--<ion-title>Upload Image</ion-title>-->
+  <!--</ion-toolbar>-->
+<!--</ion-header>-->
 
 <ion-content padding>
-  <div class="camera"></div>
-  <input type="file" (change)="fileChanged($event)"/>
-  <button ion-button (click)="takePhoto">Take Photo </button>
+
+  <div class="centerDiv">
+    <ion-text text-center="center">
+      <p>UPLOAD FROM</p>
+    </ion-text>
+    <ion-button class="mainButton" size="small" (click)="takePicture(1)">
+      Camera
+    </ion-button>
+    <ion-button class="mainButton" size="small"(click)="takePicture(0)">
+      Gallery
+    </ion-button>
+  </div>
 
 </ion-content>
