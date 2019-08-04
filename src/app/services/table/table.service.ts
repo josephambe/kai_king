@@ -67,32 +67,7 @@ export class TableService {
   getTableDetail(tableId: string): firebase.firestore.DocumentReference {
       return this.tableListRef.doc(tableId);
   }
-
-  // getTablePhotos(tableId: string): Promise<void> {
-  //     let table of this.tableListRef{
-  //
-  //     }
-  //         this.tableListRef.get().then( tableSnapshot => {
-  //             tableSnapshot.forEach
-  //         })
-  //         .doc(tableId)
-  //         .collection(`postList`)
-  //         .get()
-  //         .then(tableListSnapshot => {
-  //             this.tablePhotos = [];
-  //             tableListSnapshot.forEach(snap => {
-  //                 this.tablePhotos.push({
-  //                     photoTitle: snap.data().photoTitle,
-  //                     photoDescription: snap.data().photoDescription,
-  //                     picture: snap.data().picture,
-  //                 });
-  //
-  //                 return false;
-  //             });
-  //         });
-  //         return this.tablePhotos;
-  //
-  // }
+  
 
   addGuest(guestName: string, tableId: string, guestPicture: string = null): Promise<void> {
 

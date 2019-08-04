@@ -33,8 +33,7 @@ export class TableListPage implements OnInit {
                                   guestPhoto: guest.data().profilePicture,
 
                               });
-                              console.log('TABLE: ', snap.data().name);
-                              console.log('GUEST: ', guest.data().guestName);
+
                           });
                           this.tableList.push({
                               id: snap.id,
