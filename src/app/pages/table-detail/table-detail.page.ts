@@ -19,6 +19,7 @@ export class TableDetailPage implements OnInit {
     public guestPicture: string = null;
     photo: SafeResourceUrl;
     public tablePhotos: Array<any>;
+    public guestList: Array<any>;
 
 
 
@@ -32,12 +33,31 @@ export class TableDetailPage implements OnInit {
 
   ngOnInit() {
       const tableId: string = this.route.snapshot.paramMap.get('id');
+
+
+      this.tableService
+          .tableListRef
+          .doc(tableId)
+          .collection(`guestList`)
+          .get()
+          .then(guestSnap => {
+              this.guestList = [];
+              guestSnap.forEach(guest => {
+                  this.guestList.push({
+                      guestName: guest.data().guestName,
+                      guestPhoto: guest.data().profilePicture,
+
+                  });
+              });
+          });
+
       this.tableService
           .getTableDetail(tableId)
           .get()
           .then(tableSnapshot => {
               this.currentTable = tableSnapshot.data();
               this.currentTable.id = tableSnapshot.id;
+              this.currentTable.guests = this.guestList;
           });
 
       this.tableService

@@ -9,7 +9,7 @@
 <ion-card>
   <ion-card-content>
     <p>Description: <strong>{{currentTable?.description}}</strong></p>
-    <p>Members: <strong>{{currentTable?.guestName}}</strong></p>
+    <p>Members: <strong *ngFor="let guest of currentTable?.guests">{{guest?.guestName}}, </strong></p>
       <ion-button shape="round" (click)="goToUploader()">
         <ion-icon name="camera"></ion-icon>
       </ion-button>
