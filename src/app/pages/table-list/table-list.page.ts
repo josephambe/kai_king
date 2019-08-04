@@ -9,6 +9,7 @@ import { TableService } from '../../services/table/table.service';
 export class TableListPage implements OnInit {
 
     public tableList: Array<any>;
+    public guestList: Array<any> = [];
 
   constructor(private tableService: TableService) { }
 
@@ -19,18 +20,36 @@ export class TableListPage implements OnInit {
           .then(tableListSnapshot => {
               this.tableList = [];
               tableListSnapshot.forEach(snap => {
-                  this.tableList.push({
-                      id: snap.id,
-                      name: snap.data().name,
-                      description: snap.data().description,
-                      // price: snap.data().price,
-                      // date: snap.data().date,
-                  });
-                  return false;
-              });
-          });
-  }
+                  this.tableService
+                      .tableListRef
+                      .doc(snap.id)
+                      .collection(`guestList`)
+                      .get()
+                      .then(guestSnap => {
+                          this.guestList = [];
+                          guestSnap.forEach(guest => {
+                              this.guestList.push({
+                                  guestName: guest.data().guestName,
+                                  guestPhoto: guest.data().profilePicture,
 
+                              });
+                              console.log('TABLE: ', snap.data().name);
+                              console.log('GUEST: ', guest.data().guestName);
+                          });
+                          this.tableList.push({
+                              id: snap.id,
+                              name: snap.data().name,
+                              description: snap.data().description,
+                              guests: this.guestList,
+                          });
+                      });
+
+              });
+
+          });
+
+
+  }
 
 
 }

@@ -17,9 +17,10 @@
       <ion-label>
         <h2>{{table?.name}}</h2>
         <p>Description: <strong>{{table?.description}}</strong></p>
-        <p>Members: <strong></strong></p>
+        <p>Members: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
       </ion-label>
     </ion-item>
+
   </ion-list>
 
   <ion-button expand="block" color="primary" routerLink="/table-create">
