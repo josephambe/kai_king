@@ -1,14 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
-    <ion-title>Your Tables</ion-title>
+    <ion-title>Your Cuisine</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-list>
-    <ion-list-header> <ion-label>Your Tables</ion-label> </ion-list-header>
     <ion-item
             tappable
             *ngFor="let table of tableList"

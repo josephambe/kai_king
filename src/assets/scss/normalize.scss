@@ -41,6 +41,27 @@ main {
 h1 {
   font-size: 2em;
   margin: 0.67em 0;
+
+
+}
+
+h1.setupTitle {
+  font-size: 3.5em;
+  margin-left: 10%;
+}
+
+h1.subHeading {
+  font-size: 1em;
+  margin-left: 10%;
+}
+
+/**
+ * Correct the font size and margin on `h6` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari. Used for links
+ */
+
+h6 {
+  text-decoration: underline;
 }
 
 /* Grouping content
@@ -152,6 +173,19 @@ img {
 
 /* Forms
    ========================================================================== */
+  /**
+ * Set up forms center of app with margin
+ * Designed for authentication pages..
+ */
+  div.form {
+    text-align:center;
+    margin: 10%;
+    margin-top: 20%;
+  }
+
+  ion-button.registerPages {
+    margin-top: 15%;
+  }
 
 /**
  * 1. Change the font styles in all browsers.

@@ -1,14 +1,15 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/login"></ion-back-button>
+      <ion-back-button text="" icon="arrow-round-back" defaultHref="/login"></ion-back-button>
     </ion-buttons>
-
-    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content fullscreen>
+  <h1 class="setupTitle">Join the whanau</h1>
+
+  <div class="form">
   <form [formGroup]="signupForm">
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
@@ -47,6 +48,7 @@
     </ion-item>
 
     <ion-button
+            class="registerPages"
             expand="block"
             (click)="signupUser(signupForm)"
             [disabled]="!signupForm.valid"
@@ -54,4 +56,5 @@
       Create an Account
     </ion-button>
   </form>
+  </div>
 </ion-content>
