@@ -1,24 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
-    <ion-title>Your Cuisine</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!--<ion-header no-border>-->
+  <!--<ion-toolbar>-->
+    <!--<ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>-->
+  <!--</ion-toolbar>-->
+<!--</ion-header>-->
 
 <ion-content padding>
 
+  <h1>At this table we eat...</h1>
+
   <ion-list>
-    <ion-item
+    <ion-card
+            class="tableList"
             tappable
             *ngFor="let table of tableList"
             routerLink="/table-detail/{{table.id}}"
     >
-      <ion-label>
-        <h2>{{table?.name}}</h2>
-        <p>Description: <strong>{{table?.description}}</strong></p>
+
+        <ion-card-header>{{table?.name}}</ion-card-header>
+        <p>{{table?.description}}</p>
         <p>Members: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
-      </ion-label>
-    </ion-item>
+    </ion-card>
 
   </ion-list>
 

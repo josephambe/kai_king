@@ -55,6 +55,13 @@ h1.subHeading {
   margin-left: 10%;
 }
 
+ion-card-header {
+  --color: var(--ion-color-secondary);
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0;
+}
+
 /**
  * Correct the font size and margin on `h6` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari. Used for links
@@ -170,6 +177,17 @@ sup {
 img {
   border-style: none;
 }
+
+ion-card.tableList {
+  margin: 0px;
+  margin-top: 5%;
+  padding: 2%;
+  border-top: 4px solid var(--ion-color-secondary);
+
+  //border: 2px;
+  //box-shadow: 0 1px 10px var(--ion-color-primary);
+}
+
 
 /* Forms
    ========================================================================== */
