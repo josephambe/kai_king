@@ -1,23 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
-    <ion-title>{{currentTable?.name}}</ion-title>
+<ion-header no-border>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-round-back" defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-<ion-card>
-  <ion-card-content>
-    <p>Description: <strong>{{currentTable?.description}}</strong></p>
-    <p>Members: <strong *ngFor="let guest of currentTable?.guests">{{guest?.guestName}}, </strong></p>
-      <ion-button shape="round" (click)="goToUploader()">
-        <ion-icon name="camera"></ion-icon>
-      </ion-button>
-      <ion-button shape="round" (click)="goToUploader()">
-        <ion-icon name="person-add"></ion-icon>
-      </ion-button>
-  </ion-card-content>
-</ion-card>
+
+  <div class="tableDetailHeader">
+    <h1 class="tableTitle">{{currentTable?.name}}</h1>
+    <p class="tableDetail">{{currentTable?.description}}</p>
+    <p class="tableDetail">Chefs: <strong *ngFor="let guest of currentTable?.guests">{{guest?.guestName}}, </strong></p>
+    <div class="center">
+    <a class="roundBtn"  (click)="goToUploader()">
+      <ion-icon class="round" name="camera" ></ion-icon>
+    </a>
+    <a class="roundBtn"  (click)="goToUploader()">
+      <ion-icon class="round" name="person-add" ></ion-icon>
+    </a>
+    </div>
+  </div>
+
+  <!--<ion-button class="roundBtn" shape="round" (click)="goToUploader()">-->
+    <!--<ion-icon name="camera"></ion-icon>-->
+  <!--</ion-button>-->
+
+  <!--<ion-button shape="round" (click)="goToUploader()">-->
+    <!--<ion-icon name="person-add"></ion-icon>-->
+  <!--</ion-button>-->
 
   <ion-card>
     <ion-card-content>
