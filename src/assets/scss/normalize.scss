@@ -65,6 +65,8 @@ h1.tableTitle {
 
 }
 
+
+
 ion-card-header {
   --color: var(--ion-color-secondary);
   font-size: 2em;
@@ -230,6 +232,21 @@ ion-card.tableList {
     margin-top: 5%;
   }
 
+  div.soloImage {
+    width: 100%;
+    height: 200px;
+    overflow-y: hidden;
+    line-height: 200px;
+  }
+
+  div.soloImageText {
+    padding: 5%;
+  }
+
+  img.soloImage {
+    vertical-align: middle;
+  }
+
   ion-button.registerPages {
     margin-top: 15%;
   }
@@ -250,6 +267,13 @@ ion-card.tableList {
     color: var(--ion-color-primary-contrast) !important;
     font-size: 24px;
   }
+
+  ion-card.pictureCard {
+  object-fit: contain;
+
+  }
+
+
 
 
 /**

@@ -42,9 +42,7 @@ export class TableListPage implements OnInit {
                               guests: this.guestList,
                           });
                       });
-
               });
-
           });
 
 

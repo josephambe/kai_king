@@ -23,27 +23,17 @@
     </div>
   </div>
 
-  <!--<ion-button class="roundBtn" shape="round" (click)="goToUploader()">-->
-    <!--<ion-icon name="camera"></ion-icon>-->
-  <!--</ion-button>-->
 
-  <!--<ion-button shape="round" (click)="goToUploader()">-->
-    <!--<ion-icon name="person-add"></ion-icon>-->
-  <!--</ion-button>-->
+      <ion-card class="pictureCard" tappable *ngFor="let p of tablePhotos">
+        <div class="soloImage">
+          <img class="soloImage" src='{{p?.picture}}'/>
+        </div>
+        <div class="soloImageText">
+          <ion-label>{{p?.photoTitle}}</ion-label><br>
+          <ion-label>Description: <strong>{{p?.photoDescription}}</strong></ion-label>
+        </div>
+      </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-item tappable *ngFor="let p of tablePhotos">
-        <!--routerLink="/table-detail/{{ table.id }}"-->
-        <ion-label>
-          <h2>{{p?.photoTitle}}</h2>
-          <p>Description: <strong>{{p?.photoDescription}}</strong></p>
-          <p> PHOTO: <strong>{{p?.picture}}</strong></p>
-          <img src='{{p?.picture}}'/>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
 
 
 
