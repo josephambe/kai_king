@@ -93,12 +93,13 @@ export class TableService {
                                     .doc(newGuest.id)
                                     .update({ profilePicture: downloadURL });
                             });
+
                         });
                 }
 
-
-                // return transaction.get(this.tableListRef.doc(tableId)).then(eventDoc => {
-                //     const newRevenue = eventDoc.data().revenue + tablePrice;
+                return Promise.resolve(true);                // return transaction.get(this.tableListRef.doc(tableId));
+                // .then(eventDoc => {
+                //     const newRevenue = eventDoc.data().revenue;
                 //     transaction.update(this.tableListRef.doc(tableId), { revenue: newRevenue });
                 // });
             });

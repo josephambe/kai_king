@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
   { path: 'edit-image', loadChildren: './pages/edit-image/edit-image.module#EditImagePageModule' },
   { path: 'profile-settings', loadChildren: './pages/profile-settings/profile-settings.module#ProfileSettingsPageModule' },
+  { path: 'module-page', loadChildren: './pages/module-page/module-page.module#ModulePagePageModule' },
 
 ];
 @NgModule({

@@ -59,36 +59,9 @@ export class ProfilePage implements OnInit {
                           return false;
                       });
                   });
-              // this.userTables.push({
-              //     tableId: table.id,
-              // });
+
           });
       });
-
-      // // this.userTables.forEach(table => {
-      // for(const t of this.userTables) {
-      //     console.log('testing');
-      //     this.tableService
-      //         .tableListRef
-      //         .doc(t.tableId)
-      //         .collection(`postList`)
-      //         .get()
-      //         .then(tableListSnapshot => {
-      //             this.userPhotos = [];
-      //             tableListSnapshot.forEach(snap => {
-      //                 this.userPhotos.push({
-      //                     photoTitle: snap.data().photoTitle,
-      //                     photoDescription: snap.data().photoDescription,
-      //                     picture: snap.data().picture,
-      //                 });
-      //                 console.log(snap.data().photoTitle);
-      //
-      //
-      //                 return false;
-      //             });
-      //         });
-      // }
-
 
 
   }
@@ -103,9 +76,6 @@ export class ProfilePage implements OnInit {
         this.router.navigateByUrl('/tabs/profile-settings');
     }
 
-    // goToPhoto() {
-    //     this.router.navigateByUrl()
-    // }
 
 
 }
