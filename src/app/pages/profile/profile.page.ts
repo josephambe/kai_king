@@ -12,8 +12,11 @@ import {TableService} from '../../services/table/table.service';
 })
 export class ProfilePage implements OnInit {
 
+    public userProfile: any;
     public userTables: Array<any> = [];
     public userPhotos: Array<any> = [];
+    public tableList: Array<any>;
+
 
     constructor(
       private alertCtrl: AlertController,
@@ -25,6 +28,14 @@ export class ProfilePage implements OnInit {
 ) { }
 
   ngOnInit() {
+
+      this.profileService
+          .getUserProfile()
+          .get()
+          .then( userProfileSnapshot => {
+              this.userProfile = userProfileSnapshot.data();
+          });
+
       this.tableService
           .tableListRef.get().then( tableSnapshot => {
           tableSnapshot.forEach(table => {
@@ -40,6 +51,7 @@ export class ProfilePage implements OnInit {
                               photoTitle: snap.data().photoTitle,
                               photoDescription: snap.data().photoDescription,
                               picture: snap.data().picture,
+                              tableID: table.id,
                           });
                           console.log(snap.data().photoTitle);
 
@@ -53,29 +65,29 @@ export class ProfilePage implements OnInit {
           });
       });
 
-      // this.userTables.forEach(table => {
-      for(const t of this.userTables) {
-          console.log('testing');
-          this.tableService
-              .tableListRef
-              .doc(t.tableId)
-              .collection(`postList`)
-              .get()
-              .then(tableListSnapshot => {
-                  this.userPhotos = [];
-                  tableListSnapshot.forEach(snap => {
-                      this.userPhotos.push({
-                          photoTitle: snap.data().photoTitle,
-                          photoDescription: snap.data().photoDescription,
-                          picture: snap.data().picture,
-                      });
-                      console.log(snap.data().photoTitle);
-
-
-                      return false;
-                  });
-              });
-      }
+      // // this.userTables.forEach(table => {
+      // for(const t of this.userTables) {
+      //     console.log('testing');
+      //     this.tableService
+      //         .tableListRef
+      //         .doc(t.tableId)
+      //         .collection(`postList`)
+      //         .get()
+      //         .then(tableListSnapshot => {
+      //             this.userPhotos = [];
+      //             tableListSnapshot.forEach(snap => {
+      //                 this.userPhotos.push({
+      //                     photoTitle: snap.data().photoTitle,
+      //                     photoDescription: snap.data().photoDescription,
+      //                     picture: snap.data().picture,
+      //                 });
+      //                 console.log(snap.data().photoTitle);
+      //
+      //
+      //                 return false;
+      //             });
+      //         });
+      // }
 
 
 
@@ -90,6 +102,10 @@ export class ProfilePage implements OnInit {
     goToSettings() {
         this.router.navigateByUrl('/tabs/profile-settings');
     }
+
+    // goToPhoto() {
+    //     this.router.navigateByUrl()
+    // }
 
 
 }

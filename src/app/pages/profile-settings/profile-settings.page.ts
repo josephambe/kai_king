@@ -37,9 +37,13 @@ export class ProfileSettingsPage implements OnInit {
         });
     }
 
+    goToProfile() {
+        this.router.navigateByUrl('/tabs/profile');
+    }
+
     async updateName(): Promise<void> {
         const alert = await this.alertCtrl.create({
-            subHeader: 'Your first name & last name',
+            subHeader: 'Update your name',
             inputs: [
                 {
                     type: 'text',

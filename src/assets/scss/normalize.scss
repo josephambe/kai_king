@@ -223,6 +223,7 @@ ion-card.tableList {
  * Set up forms center of app with margin
  * Designed for authentication pages..
  */
+
   div.form {
     text-align:center;
     margin: 10%;
@@ -253,6 +254,19 @@ ion-card.tableList {
     padding: 5%;
   }
 
+  div.pictureGrid {
+    object-fit: contain;
+    width: 100%;
+  }
+
+  div.gridImage {
+    width: 100%;
+    height: 80px;
+    overflow-y: hidden;
+    align-items: center;
+    background-color: var(--ion-color-success);
+  }
+
   img.soloImage {
     vertical-align: middle;
   }
@@ -262,7 +276,7 @@ ion-card.tableList {
   }
 
   ion-button.uploader {
-    --background: var( --ion-color-success);
+    --background: var(--ion-color-warning);
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -271,18 +285,6 @@ ion-card.tableList {
     font-size: 24px;
     margin-top: 10%;
 
-  }
-
-
-  a.roundBtn {
-    margin: 0 15px 0 15px;
-    display:inline-block;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: var(--ion-color-primary);
-    text-align: center;
-    padding: 7px 0;
   }
 
   ion-icon.round {
@@ -300,6 +302,20 @@ ion-card.tableList {
 
   }
 
+  ion-list.gridHeader {
+    margin: 10px 0 0 0;
+  }
+
+  a.roundBtn {
+    margin: 0 15px 0 15px;
+    display:inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: var(--ion-color-primary);
+    text-align: center;
+    padding: 7px 0;
+  }
 
 
 
