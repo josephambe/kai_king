@@ -515,3 +515,23 @@ template {
   display: none;
 }
 
+
+  /* Colour
+     ========================================================================== */
+  ion-tab-button.table-list:focus {
+        color: var(--ion-color-secondary);
+  }
+  ion-tab-button.uploader:focus {
+    color: var(--ion-color-warning);
+  }
+
+  ion-tab-button.profile:focus {
+    color: var(--ion-color-success);
+  }
+
+icon-tab-button{
+  color: var(--ion-color-secondary);
+
+  }
+
+
