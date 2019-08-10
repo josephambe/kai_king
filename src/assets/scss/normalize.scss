@@ -235,11 +235,30 @@ ion-card.tableList {
     margin-top: 5%;
   }
 
+  div.d0 {
+    background: grey;
+    width:100%;
+    height: 300px;
+  }
+
+  div.outer-div {
+    height: 300px;
+    overflow: hidden;
+  }
+
+  div.fixedHeight {
+    height: 300px;
+    width: 100%;
+    //overflow-y: hidden;
+    background-color: var(--ion-color-primary);
+    display: table;
+  }
+
   div.soloImage {
     width: 100%;
-    height: 300px;
-    overflow-y: hidden;
-    align-items: center;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
     background-color: var(--ion-color-primary);
   }
 
@@ -268,7 +287,6 @@ ion-card.tableList {
   }
 
   img.soloImage {
-    vertical-align: middle;
   }
 
   ion-button.registerPages {
@@ -293,7 +311,7 @@ ion-card.tableList {
   }
 
   ion-card.pictureCard {
-  object-fit: contain;
+    object-fit: contain;
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 0 !important;
@@ -522,7 +540,7 @@ template {
   ion-tab-button.table-list {
     --color-selected: var(--ion-color-secondary);
   }
-  
+
   ion-tab-button.uploader {
     --color-selected: var(--ion-color-warning);
   }
