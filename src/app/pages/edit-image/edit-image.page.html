@@ -36,8 +36,7 @@
     <ion-list>
       <ion-item tappable *ngFor="let table of tableList; let i = index">
         <ion-label color="primary">{{table.name}}</ion-label>
-        <!--<ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (ionChange)="getChanged(table, photoTable)"></ion-checkbox>-->
-        <ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (click)="Selection(table.name, table, photoTable);"></ion-checkbox>
+        <ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (click)="Selection(table.name, table);"></ion-checkbox>
 
       </ion-item>
     </ion-list>
