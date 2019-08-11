@@ -216,6 +216,34 @@ ion-card.tableList {
   //box-shadow: 0 1px 10px var(--ion-color-primary);
 }
 
+ion-item.blue {
+  color: var(--ion-color-primary);
+}
+
+ion-label.blue {
+  color: var(--ion-color-primary);
+}
+
+ion-input.blue {
+  color: var(--ion-color-primary);
+}
+
+//ion-input.yellow {
+//  color: var(--ion-color-warning);
+//}
+
+ion-item.yellow {
+  color: var(--ion-color-warning);
+}
+
+ion-label.yellow {
+  color: var(--ion-color-warning);
+}
+
+ion-button.yellow {
+    --background: var(--ion-color-warning);
+}
+
 
 /* Forms
    ========================================================================== */

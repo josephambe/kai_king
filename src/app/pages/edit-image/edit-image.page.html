@@ -1,18 +1,18 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/uploader"></ion-back-button>
+      <ion-back-button text="" icon="arrow-round-back" defaultHref="/tabs/uploader"></ion-back-button>
     </ion-buttons>
-    <ion-title>Upload Photo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <img [src]="photo" >
 
-  <ion-item>
+  <ion-item class="yellow">
     <ion-label position="stacked">Title</ion-label>
     <ion-input
+            class="blue"
             [(ngModel)]="photoTitle"
             type="text"
             placeholder="Name your creation!"
@@ -20,9 +20,10 @@
     </ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="yellow">
     <ion-label position="stacked">Description</ion-label>
     <ion-input
+            class="blue"
             [(ngModel)]="photoDescription"
             type="text"
             placeholder="Give us a taster"
@@ -30,11 +31,11 @@
     </ion-input>
   </ion-item>
 
-  <ion-item>
+  <ion-item class="yellow">
     <ion-label position="stacked">Share With</ion-label>
     <ion-list>
       <ion-item tappable *ngFor="let table of tableList; let i = index">
-        <ion-label>{{table.name}}</ion-label>
+        <ion-label color="primary">{{table.name}}</ion-label>
         <!--<ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (ionChange)="getChanged(table, photoTable)"></ion-checkbox>-->
         <ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (click)="Selection(table.name, table, photoTable);"></ion-checkbox>
 
@@ -43,10 +44,7 @@
   </ion-item>
 
 
-  <ion-button
-          expand="block"
-          (click)="uploadPhoto(0)"
-  >
+  <ion-button class="yellow" expand="block" (click)="uploadPhoto(0)">
     Upload
   </ion-button>
 
