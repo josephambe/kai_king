@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { storage, initializeApp } from 'firebase';
-import {environment} from '../../../environments/environment';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {Component, OnInit} from '@angular/core';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {NavigationExtras, Router} from '@angular/router';
 
 
-
 @Component({
-  selector: 'app-uploader',
-  templateUrl: './uploader.page.html',
-  styleUrls: ['./uploader.page.scss'],
+    selector: 'app-uploader',
+    templateUrl: './uploader.page.html',
+    styleUrls: ['./uploader.page.scss'],
 
 })
 
@@ -19,16 +16,18 @@ export class UploaderPage implements OnInit {
     public photoData: string = null;
     photo: SafeResourceUrl;
 
-  constructor(
-      private camera: Camera,
-      private router: Router) {
-  }
+    constructor(
+        private camera: Camera,
+        private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 
-    // take Photo
+    // Take Photo
+    // sourceType 1 = camera
+    // sourceType 0 = gallery
     takePicture(sourceType: number) {
         const options: CameraOptions = {
             quality: 50,
@@ -37,17 +36,18 @@ export class UploaderPage implements OnInit {
             mediaType: this.camera.MediaType.PICTURE,
             correctOrientation: true,
             sourceType,
-        }
+        };
 
         this.camera.getPicture(options).then((imageData) => {
             this.photoData = imageData;
             this.photo = 'data:image/jpeg;base64,' + imageData;
             this.openDetailsWithState();
         }, (err) => {
-            // Handle error
+            console.log('There is an error uploading your photo!');
         });
     }
 
+    // Preparation to pass photo to next 'Edit-image' page
     openDetailsWithState() {
         const navigationExtras: NavigationExtras = {
             state: {
@@ -57,8 +57,6 @@ export class UploaderPage implements OnInit {
         };
         this.router.navigate(['tabs/edit-image'], navigationExtras);
     }
-
-
 
 
 }

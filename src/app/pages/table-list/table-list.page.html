@@ -1,14 +1,7 @@
-<!--<ion-header no-border>-->
-  <!--<ion-toolbar>-->
-    <!--<ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>-->
-  <!--</ion-toolbar>-->
-<!--</ion-header>-->
 
 <ion-content padding>
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
-        <ion-refresher-content class="blue"
-            refreshingSpinner="bubbles"
-            refreshingText="{{pun}}">
+        <ion-refresher-content class="blue" refreshingSpinner="bubbles" refreshingText="{{pun}}">
         </ion-refresher-content>
     </ion-refresher>
 
@@ -33,8 +26,5 @@
     Create a new Table
   </ion-button>
 
-  <!--<ion-button expand="block" color="primary" routerLink="/table-list">-->
-    <!--See your events-->
-  <!--</ion-button>-->
 </ion-content>
 
