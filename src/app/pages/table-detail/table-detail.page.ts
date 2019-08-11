@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TableService} from '../../services/table/table.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {ModalController} from '@ionic/angular';
 import {ModulePagePage} from '../module-page/module-page.page';
-import {Camera} from '@ionic-native/camera/ngx';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 
 @Component({
     selector: 'app-table-detail',
@@ -14,6 +14,7 @@ import {Camera} from '@ionic-native/camera/ngx';
 export class TableDetailPage implements OnInit {
 
     public currentTable: any = {};
+    // public guestName = '';
     photo: SafeResourceUrl;
     public tablePhotos: Array<any>;
     public guestList: Array<any>;
@@ -35,7 +36,24 @@ export class TableDetailPage implements OnInit {
         const tableId: string = this.route.snapshot.paramMap.get('id');
         this.tableID = tableId;
 
-        // Responsible for accessing the current table
+        // Responsible for accessing the guests of the current table
+        this.tableService
+            .tableListRef
+            .doc(tableId)
+            .collection(`guestList`)
+            .get()
+            .then(guestSnap => {
+                this.guestList = [];
+                guestSnap.forEach(guest => {
+                    this.guestList.push({
+                        guestName: guest.data().guestName,
+                        guestPhoto: guest.data().profilePicture,
+
+                    });
+                });
+            });
+
+        // Responsible for creating a current table object with id and guest list
         this.tableService
             .getTableDetail(tableId)
             .get()

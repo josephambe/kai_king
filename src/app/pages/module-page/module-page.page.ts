@@ -5,63 +5,39 @@ import {ModalController, NavController, NavParams} from '@ionic/angular';
 
 
 @Component({
-  selector: 'app-module-page',
-  templateUrl: './module-page.page.html',
-  styleUrls: ['./module-page.page.scss'],
+    selector: 'app-module-page',
+    templateUrl: './module-page.page.html',
+    styleUrls: ['./module-page.page.scss'],
 })
 export class ModulePagePage implements OnInit {
 
-    @Input() tableId; string;
-
-
-
+    @Input() tableId;
+    string;
     public currentTable: any = {};
     public guestName = '';
     public guestList: Array<any>;
 
 
     constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private tableService: TableService,
-      private modalCtrl: ModalController,
-      private navParams: NavParams,
-      private navCtrl: NavController,
-      ) {
+        private route: ActivatedRoute,
+        private router: Router,
+        private tableService: TableService,
+        private modalCtrl: ModalController,
+    ) {
+    }
 
-      console.log(navParams.get('tableId'));
+    ngOnInit() {
 
-     }
-
-
-
-  ngOnInit() {
-
-      this.tableService
-          .getTableDetail(this.tableId)
-          .get()
-          .then(tableSnapshot => {
-              this.currentTable = tableSnapshot.data();
-              this.currentTable.id = tableSnapshot.id;
-              this.currentTable.guests = this.guestList;
-          });
-
-      this.tableService
-          .tableListRef
-          .doc(this.tableId)
-          .collection(`guestList`)
-          .get()
-          .then(guestSnap => {
-              this.guestList = [];
-              guestSnap.forEach(guest => {
-                  this.guestList.push({
-                      guestName: guest.data().guestName,
-                      guestPhoto: guest.data().profilePicture,
-
-                  });
-              });
-          });
-  }
+        // Responsible for accessing the current table
+        this.tableService
+            .getTableDetail(this.tableId)
+            .get()
+            .then(tableSnapshot => {
+                this.currentTable = tableSnapshot.data();
+                this.currentTable.id = tableSnapshot.id;
+                this.currentTable.guests = this.guestList;
+            });
+    }
 
 
     dismiss() {
@@ -75,11 +51,9 @@ export class ModulePagePage implements OnInit {
             .addGuest(
                 guestName,
                 this.currentTable.id,
-                // this.guestPicture
             )
             .then(() => {
                 this.guestName = '';
-                // this.guestPicture = null;
                 return Promise.resolve('Chef Added');
 
             });
