@@ -33,9 +33,11 @@
   <ion-item>
     <ion-label position="stacked">Share With</ion-label>
     <ion-list>
-      <ion-item tappable *ngFor="let table of tableList">
+      <ion-item tappable *ngFor="let table of tableList; let i = index">
         <ion-label>{{table.name}}</ion-label>
-        <ion-checkbox slot="start" [(ngModel)]="photoTable" (ionChange)="getChanged(table, photoTable)"></ion-checkbox>
+        <!--<ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (ionChange)="getChanged(table, photoTable)"></ion-checkbox>-->
+        <ion-checkbox slot="start" [disabled]="tableList[i].value" [(ngModel)]="photoTable" (click)="Selection(table.name, table, photoTable);"></ion-checkbox>
+
       </ion-item>
     </ion-list>
   </ion-item>
@@ -43,7 +45,7 @@
 
   <ion-button
           expand="block"
-          (click)="uploadPhoto(photoTitle, photoDescription, photoTable)"
+          (click)="uploadPhoto(0)"
   >
     Upload
   </ion-button>

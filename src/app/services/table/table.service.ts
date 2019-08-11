@@ -108,8 +108,8 @@ export class TableService {
        });
   }
 
-  addPhoto(photoTitle: string, photoDescription: string, tableList: Array<any>, picture: string = null, votes: number): Promise<void> {
-      for (const table of tableList) {
+  addPhoto(photoTitle: string, photoDescription: string, table: any, picture: string = null, votes: number): Promise<void> {
+      // for (const table of tableList) {
           console.log('UPLOADING TO TABLE ' + table.name);
 
           return this.tableListRef
@@ -146,7 +146,7 @@ export class TableService {
 
 
               });
-      }
+      
 
   }
 }

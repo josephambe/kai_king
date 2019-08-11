@@ -16,7 +16,15 @@ export class EditImagePage implements OnInit {
     public photoData: string = null;
     public tableList: Array<any>;
     public selected: Array<any> = [];
+    public selectedTable: any;
 
+    //Get value on ionChange on IonRadioGroup
+    selectedRadioGroup:any;
+    //Get value on ionSelect on IonRadio item
+    selectedRadioItem:any;
+    photoTitle: any;
+    photoDescription: any;
+    photoTable: any;
 
 
 
@@ -47,6 +55,18 @@ export class EditImagePage implements OnInit {
             });
     }
 
+    Selection(name: string, table, photoTable) {
+        this.tableList.forEach(x => {
+            if (x.name !== name) {
+                x.value = !x.value;
+
+                this.selectedTable = table;
+                console.log("SELECTED: " + this.selectedTable.name + " " + this.photoTitle + " " + this.photoDescription);
+            }
+        });
+        //this.getChanged(table, photoTable);
+    }
+
     getChanged(table, photoTable) {
         // console.log(table.name);
         // console.log(table.id);
@@ -64,6 +84,7 @@ export class EditImagePage implements OnInit {
         }
     }
 
+
     removeTableFromSelected(table) {
         const index: number = this.selected.indexOf(table);
         if (index !== -1) {
@@ -80,22 +101,25 @@ export class EditImagePage implements OnInit {
     }
 
     uploadPhoto(
-        photoTitle: string,
-        photoDescription: string,
-        photoTable: Array<any>,
-        votes: 0
+        // photoTitle: string,
+        // photoDescription: string,
+        // photoTable: Array<any>,
+        votes: any,
     ): void {
-        photoTable = this.selected;
+        // photoTable = this.selectedTable;
         if (
-            photoTitle === undefined ||
-            photoDescription === undefined ||
-            photoTable === undefined
+            this.photoTitle === undefined ||
+            this.photoDescription === undefined ||
+            this.selectedTable === undefined
         ) {
-            return;
+            console.log('MISSING SOMETHING');
+            // return;
         }
+
         this.tableService
-            .addPhoto(photoTitle, photoDescription, photoTable, this.photoData, votes)
+            .addPhoto(this.photoTitle, this.photoDescription, this.selectedTable, this.photoData, votes)
             .then(() => {
+                console.log('loading upload');
                 this.router.navigateByUrl('tabs/profile');
             });
     }
