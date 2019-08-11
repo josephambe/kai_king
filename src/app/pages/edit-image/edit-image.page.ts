@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {SafeResourceUrl} from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { TableService } from '../../services/table/table.service';
+import {TableService} from '../../services/table/table.service';
 import {AlertController, LoadingController} from '@ionic/angular';
 
-import {forEach} from '@angular-devkit/schematics';
-
-
 @Component({
-  selector: 'app-edit-image',
-  templateUrl: './edit-image.page.html',
-  styleUrls: ['./edit-image.page.scss'],
+    selector: 'app-edit-image',
+    templateUrl: './edit-image.page.html',
+    styleUrls: ['./edit-image.page.scss'],
 })
 export class EditImagePage implements OnInit {
 
@@ -27,15 +23,15 @@ export class EditImagePage implements OnInit {
     photoTable: any;
 
 
-
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private tableService: TableService,
         public alertController: AlertController,
         public loadingCtrl: LoadingController,
+    ) {
 
-) {
+        // handles being passed the selected image from the uploader page
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                 this.photo = this.router.getCurrentNavigation().extras.state.photo;
@@ -45,6 +41,8 @@ export class EditImagePage implements OnInit {
     }
 
     ngOnInit() {
+
+        // Responsible for getting the data for each table in current users table list
         this.tableService
             .getTableList()
             .get()
@@ -62,6 +60,7 @@ export class EditImagePage implements OnInit {
             });
     }
 
+
     // Restricts selection to one table at a time
     Selection(name: string, table) {
         this.tableList.forEach(x => {
@@ -76,7 +75,7 @@ export class EditImagePage implements OnInit {
 
     async uploadPhoto(
         votes: any, // feature to be implemented in next iteration
-    ): void {
+    ) {
         if (
             this.photoTitle === undefined ||
             this.photoDescription === undefined ||
@@ -91,11 +90,11 @@ export class EditImagePage implements OnInit {
             .addPhoto(this.photoTitle, this.photoDescription, this.selectedTable, this.photoData, votes)
             .then(() => {
                 this.loading.dismiss().then(() => {
-                    // console.log('loading upload');
                     this.router.navigateByUrl('tabs/profile');
                 });
             });
     }
+
 
     async presentAlert() {
         const alert = await this.alertController.create({
@@ -106,5 +105,4 @@ export class EditImagePage implements OnInit {
 
         await alert.present();
     }
-
 }

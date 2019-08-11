@@ -14,7 +14,6 @@ import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 export class TableDetailPage implements OnInit {
 
     public currentTable: any = {};
-    // public guestName = '';
     photo: SafeResourceUrl;
     public tablePhotos: Array<any>;
     public guestList: Array<any>;
