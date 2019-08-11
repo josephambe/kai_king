@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {SafeResourceUrl} from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { TableService } from '../../services/table/table.service';
-import {forEach} from '@angular-devkit/schematics';
-
+import {TableService} from '../../services/table/table.service';
+import {AlertController, LoadingController} from '@ionic/angular';
 
 @Component({
-  selector: 'app-edit-image',
-  templateUrl: './edit-image.page.html',
-  styleUrls: ['./edit-image.page.scss'],
+    selector: 'app-edit-image',
+    templateUrl: './edit-image.page.html',
+    styleUrls: ['./edit-image.page.scss'],
 })
 export class EditImagePage implements OnInit {
 
@@ -16,11 +14,24 @@ export class EditImagePage implements OnInit {
     public photoData: string = null;
     public tableList: Array<any>;
     public selected: Array<any> = [];
+    public selectedTable: any;
+    public loading: HTMLIonLoadingElement;
 
 
+    photoTitle: any;
+    photoDescription: any;
+    photoTable: any;
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private tableService: TableService) {
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private tableService: TableService,
+        public alertController: AlertController,
+        public loadingCtrl: LoadingController,
+    ) {
+
+        // handles being passed the selected image from the uploader page
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                 this.photo = this.router.getCurrentNavigation().extras.state.photo;
@@ -30,6 +41,8 @@ export class EditImagePage implements OnInit {
     }
 
     ngOnInit() {
+
+        // Responsible for getting the data for each table in current users table list
         this.tableService
             .getTableList()
             .get()
@@ -47,57 +60,49 @@ export class EditImagePage implements OnInit {
             });
     }
 
-    getChanged(table, photoTable) {
-        // console.log(table.name);
-        // console.log(table.id);
-        // console.log(photoTable);
-        if (photoTable) {
-            this.selected.push(table);
-            console.log('LENGTH: ' + this.selected.length);
 
-        } else {
-            this.removeTableFromSelected(table);
-            console.log('LENGTH: ' + this.selected.length);
-        }
-        for (const t of this.selected) {
-            console.log('NAME: ' + t.name + ' ID: ' + t.id);
-        }
+    // Restricts selection to one table at a time
+    Selection(name: string, table) {
+        this.tableList.forEach(x => {
+            if (x.name !== name) {
+                x.value = !x.value;
+
+                this.selectedTable = table;
+            }
+        });
     }
 
-    removeTableFromSelected(table) {
-        const index: number = this.selected.indexOf(table);
-        if (index !== -1) {
-            this.selected.splice(index, 1);
-        }
-    }
 
-    getSelectedTables() {
-        for (const t of this.selected) {
-            console.log('NAME: ' + t.name + ' ID: ' + t.id);
-            return t.id;
-
-        }
-    }
-
-    uploadPhoto(
-        photoTitle: string,
-        photoDescription: string,
-        photoTable: Array<any>,
-        votes: 0
-    ): void {
-        photoTable = this.selected;
+    async uploadPhoto(
+        votes: any, // feature to be implemented in next iteration
+    ) {
         if (
-            photoTitle === undefined ||
-            photoDescription === undefined ||
-            photoTable === undefined
+            this.photoTitle === undefined ||
+            this.photoDescription === undefined ||
+            this.selectedTable === undefined
         ) {
-            return;
+            this.presentAlert();
         }
+        this.loading = await this.loadingCtrl.create();
+        await this.loading.present();
+
         this.tableService
-            .addPhoto(photoTitle, photoDescription, photoTable, this.photoData, votes)
+            .addPhoto(this.photoTitle, this.photoDescription, this.selectedTable, this.photoData, votes)
             .then(() => {
-                this.router.navigateByUrl('tabs/profile');
+                this.loading.dismiss().then(() => {
+                    this.router.navigateByUrl('tabs/profile');
+                });
             });
     }
 
+
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            header: 'Whoops!',
+            message: 'Make sure every field is filled.',
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
 }

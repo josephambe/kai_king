@@ -1,34 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start"> <ion-back-button></ion-back-button> </ion-buttons>
-    <ion-title>Your Tables</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
 
-  <ion-list>
-    <ion-list-header> <ion-label>Your Tables</ion-label> </ion-list-header>
-    <ion-item
-            tappable
-            *ngFor="let table of tableList"
-            routerLink="/table-detail/{{table.id}}"
-    >
-      <ion-label>
-        <h2>{{table?.name}}</h2>
-        <p>Description: <strong>{{table?.description}}</strong></p>
-        <p>Members: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
-      </ion-label>
-    </ion-item>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+        <ion-refresher-content class="blue" refreshingSpinner="bubbles" refreshingText="{{pun}}">
+        </ion-refresher-content>
+    </ion-refresher>
 
-  </ion-list>
+    <h1>At this table we eat...</h1>
 
-  <ion-button expand="block" color="primary" routerLink="/table-create">
-    Create a new Table
-  </ion-button>
+    <ion-list>
+        <ion-card
+                class="tableList"
+                tappable
+                *ngFor="let table of tableList"
+                routerLink="/table-detail/{{table.id}}"
+        >
 
-  <!--<ion-button expand="block" color="primary" routerLink="/table-list">-->
-    <!--See your events-->
-  <!--</ion-button>-->
+            <ion-card-header>{{table?.name}}</ion-card-header>
+            <p>{{table?.description}}</p>
+            <p>Chefs: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
+        </ion-card>
+
+    </ion-list>
+
+    <ion-button expand="block" color="primary" routerLink="/table-create">
+        Create a new Table
+    </ion-button>
+
 </ion-content>
 

@@ -1,9 +1,8 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/table-list"></ion-back-button>
+      <ion-back-button text="" icon="arrow-round-back" defaultHref="/tabs/table-list"></ion-back-button>
     </ion-buttons>
-    <ion-title>Profile Page</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logOut()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
@@ -15,21 +14,40 @@
 
 <ion-content padding>
 
-  <ion-button (click)="goToSettings()">Settings</ion-button>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+    <ion-refresher-content class="pink" refreshingSpinner="bubbles" refreshingText="{{this.pun}}"></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="tableDetailHeader">
+    <h1 class="tableTitle"*ngIf="userProfile?.firstName || userProfile?.lastName">
+      {{userProfile?.firstName}} {{userProfile?.lastName}}</h1>
+    <p class="tableDetail">{{userProfile?.email}}</p>
+    <div class="center">
+    <a class="roundBtn"  (click)="goToSettings()">
+      <ion-icon class="round" name="settings" ></ion-icon>
+    </a>
+    </div>
+  </div>
 
 
-  <ion-list> <ion-list-header> Your Photos </ion-list-header> </ion-list>
+  <ion-list class="gridHeader"> <ion-list-header> Your Photos </ion-list-header> </ion-list>
 
-  <ion-item tappable *ngFor="let p of userPhotos">
-    <!--routerLink="/table-detail/{{ table.id }}"-->
-    <ion-label>
-      <h2>{{p?.photoTitle}}</h2>
-      <p>Description: <strong>{{p?.photoDescription}}</strong></p>
-      <p> PHOTO: <strong>{{p?.picture}}</strong></p>
-      <img src='{{p?.picture}}'/>
-    </ion-label>
-  </ion-item>
-
+  <ion-grid>
+    <ion-row no-padding >
+      <ion-col size="4" *ngFor="let p of userPhotos">
+        <div  class="pictureGrid" routerLink="/table-detail/{{p.tableID}}">
+          <div class="gridImage">
+            <div class="fixedHeightSmall">
+              <div class="soloImage">
+                <img src='{{p?.picture}}'/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
+
 

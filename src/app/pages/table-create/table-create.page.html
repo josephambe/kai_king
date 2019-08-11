@@ -1,37 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/table-list"></ion-back-button>
-    </ion-buttons>
-    <ion-title>New Table</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/table-list"></ion-back-button>
+        </ion-buttons>
+        <ion-title>New Table</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label position="stacked">Table Name</ion-label>
-    <ion-input
-            [(ngModel)]="tableName"
-            type="text"
-            placeholder="What's your table's name?"
-    >
-    </ion-input>
-  </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Table Name</ion-label>
+        <ion-input
+                [(ngModel)]="tableName"
+                type="text"
+                placeholder="What's your table's name?"
+        >
+        </ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Description</ion-label>
-    <ion-input
-            [(ngModel)]="tableDescription"
-            type="string"
-            placeholder="How would you describe your table?"
-    >
-    </ion-input>
-  </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-input
+                [(ngModel)]="tableDescription"
+                type="string"
+                placeholder="How would you describe your table?"
+        >
+        </ion-input>
+    </ion-item>
 
-  <ion-button
-          expand="block"
-          (click)="createTable(tableName, tableDescription, 'tbc')"
-  >
-    Create Table
-  </ion-button>
+    <ion-button
+            expand="block"
+            (click)="createTable(tableName, tableDescription, 'tbc')"
+    >
+        Create Table
+    </ion-button>
 </ion-content>

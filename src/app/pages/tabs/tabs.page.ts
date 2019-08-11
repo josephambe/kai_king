@@ -2,18 +2,18 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonTabs} from '@ionic/angular';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.page.html',
-  styleUrls: ['./tabs.page.scss'],
+    selector: 'app-tabs',
+    templateUrl: './tabs.page.html',
+    styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
 
-  @ViewChild('tabs') tabs: IonTabs
-  constructor() { }
+    @ViewChild('tabs') tabs: IonTabs;
 
-  ngOnInit() {
-    this.tabs.select('table-list'); // sets default tab to table-list
-  }
+    constructor() {
+    }
 
-
+    ngOnInit() {
+        this.tabs.select('table-list'); // sets default tab to table-list
+    }
 }
