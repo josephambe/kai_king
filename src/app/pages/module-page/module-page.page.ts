@@ -65,8 +65,6 @@ export class ModulePagePage implements OnInit {
 
 
     dismiss() {
-        // using the injected ModalController this page
-        // can "dismiss" itself and optionally pass back data
         this.modalCtrl.dismiss({
             dismissed: true
         });
@@ -88,9 +86,5 @@ export class ModulePagePage implements OnInit {
         this.dismiss();
     }
 
-    goBack() {
-      console.log(this.navCtrl.pop());
-      this.navCtrl.pop();
-    }
 
 }
