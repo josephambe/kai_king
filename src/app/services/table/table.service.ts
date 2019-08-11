@@ -109,44 +109,42 @@ export class TableService {
   }
 
   addPhoto(photoTitle: string, photoDescription: string, table: any, picture: string = null, votes: number): Promise<void> {
-      // for (const table of tableList) {
-          console.log('UPLOADING TO TABLE ' + table.name);
+      console.log('UPLOADING TO TABLE ' + table.name);
 
-          return this.tableListRef
-              .doc(table.id)
-              .collection('postList')
-              .add({ photoTitle, photoDescription})
-              .then((newPost) => {
-                  return firebase.firestore().runTransaction(transaction => {
+      return this.tableListRef
+          .doc(table.id)
+          .collection('postList')
+          .add({ photoTitle, photoDescription})
+          .then((newPost) => {
+              return firebase.firestore().runTransaction(transaction => {
 
-                      if (picture != null) {
-                          const storageRef = firebase
-                              .storage()
-                              .ref(`/post/${newPost.id}/picture.jpeg`);
+                  if (picture != null) {
+                      const storageRef = firebase
+                          .storage()
+                          .ref(`/post/${newPost.id}/picture.jpeg`);
 
-                          return storageRef
-                              .putString(picture, 'base64')
-                              .then(() => {
-                                  return storageRef.getDownloadURL().then(downloadURL => {
-                                      return this.tableListRef
-                                          .doc(table.id)
-                                          .collection('postList')
-                                          .doc(newPost.id)
-                                          .update({ picture: downloadURL });
-                                  });
+                      return storageRef
+                          .putString(picture, 'base64')
+                          .then(() => {
+                              return storageRef.getDownloadURL().then(downloadURL => {
+                                  return this.tableListRef
+                                      .doc(table.id)
+                                      .collection('postList')
+                                      .doc(newPost.id)
+                                      .update({ picture: downloadURL });
                               });
-                      }
+                          });
+                  }
 
 
-                      return transaction.get(this.tableListRef.doc(table.id).collection('postList').doc(newPost.id)).then(eventDoc => {
-                          const newRanking = eventDoc.data().votes + votes;
-                          transaction.update(this.tableListRef.doc(table.id), { ranking: newRanking });
-                      });
+                  return transaction.get(this.tableListRef.doc(table.id).collection('postList').doc(newPost.id)).then(eventDoc => {
+                      const newRanking = eventDoc.data().votes + votes;
+                      transaction.update(this.tableListRef.doc(table.id), { ranking: newRanking });
                   });
-
-
               });
-      
+
+
+          });
 
   }
 }

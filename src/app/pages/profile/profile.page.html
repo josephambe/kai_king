@@ -31,15 +31,14 @@
   <ion-grid>
     <ion-row no-padding >
       <ion-col size="4" *ngFor="let p of userPhotos">
-        <div  class="pictureGrid" routerLink="/table-detail/{{p.tableID}}"
-        >
+        <div  class="pictureGrid" routerLink="/table-detail/{{p.tableID}}">
           <div class="gridImage">
-            <img class="soloImage" src='{{p?.picture}}'/>
+            <div class="fixedHeightSmall">
+              <div class="soloImage">
+                <img src='{{p?.picture}}'/>
+              </div>
+            </div>
           </div>
-          <!--<div class="soloImageText">-->
-            <!--<ion-label class="photoTitle">{{p?.photoTitle}}</ion-label><br>-->
-            <!--<ion-label>Description: <strong>{{p?.photoDescription}}</strong></ion-label>-->
-          <!--</div>-->
         </div>
       </ion-col>
     </ion-row>

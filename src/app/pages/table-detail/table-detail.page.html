@@ -25,13 +25,13 @@
 
   <ion-card class="pictureCard" tappable *ngFor="let p of tablePhotos">
     <div class="d0">
-    <div class="outer-div">
-    <div class="fixedHeight">
-    <div class="soloImage">
-      <img class="soloImage" src='{{p?.picture}}'/>
-    </div>
-    </div>
-    </div>
+      <div class="outer-div">
+        <div class="fixedHeight">
+          <div class="soloImage">
+            <img src='{{p?.picture}}'/>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="soloImageText">
       <ion-label class="photoTitle">{{p?.photoTitle}}</ion-label><br>
