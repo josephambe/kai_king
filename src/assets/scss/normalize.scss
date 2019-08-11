@@ -89,7 +89,14 @@ p.tableDetail {
 
 }
 
+  ion-refresher-content.blue {
+    --color: var(--ion-color-secondary);
+  }
 
+  ion-refresher-content.pink {
+    --color: var(--ion-color-success);
+    margin-bottom: 20px;
+  }
 /**
  * Correct the font size and margin on `h6` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari. Used for links

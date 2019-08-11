@@ -8,6 +8,13 @@
 
 <ion-content padding>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+    <ion-refresher-content class="blue"
+                           refreshingSpinner="bubbles"
+                           refreshingText="{{pun}}">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="tableDetailHeader">
     <h1 class="tableTitle">{{currentTable?.name}}</h1>
     <p class="tableDetail">{{currentTable?.description}}</p>

@@ -5,6 +5,12 @@
 <!--</ion-header>-->
 
 <ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
+        <ion-refresher-content class="blue"
+            refreshingSpinner="bubbles"
+            refreshingText="{{pun}}">
+        </ion-refresher-content>
+    </ion-refresher>
 
   <h1>At this table we eat...</h1>
 

@@ -15,8 +15,7 @@ export class ProfilePage implements OnInit {
     public userProfile: any;
     public userTables: Array<any> = [];
     public userPhotos: Array<any> = [];
-    public tableList: Array<any>;
-
+    public pun: string;
 
     constructor(
       private alertCtrl: AlertController,
@@ -65,6 +64,21 @@ export class ProfilePage implements OnInit {
 
 
   }
+
+    doRefresh(event) {
+        const punArray = [
+            'You are one in a melon',
+            'I love you from my head tomatoes',
+            'Life is spec-taco-ular',
+            'You look radishing today',
+        ];
+        const randomNumber = Math.floor(Math.random()* punArray.length);
+        this.pun = punArray[randomNumber];
+
+        setTimeout(() => {
+            event.target.complete();
+        }, 4000);
+    }
 
   logOut(): void {
       this.authService.logoutUser().then( () => {

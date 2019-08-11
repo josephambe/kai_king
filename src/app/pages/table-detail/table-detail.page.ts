@@ -22,6 +22,7 @@ export class TableDetailPage implements OnInit {
     public tablePhotos: Array<any>;
     public guestList: Array<any>;
     public tableID = '';
+    public pun: string;
 
 
 
@@ -82,20 +83,6 @@ export class TableDetailPage implements OnInit {
           });
   }
 
-  // addGuest(guestName: string): void {
-  //     this.tableService
-  //         .addGuest(
-  //             guestName,
-  //             this.currentTable.id,
-  //             this.guestPicture
-  //         )
-  //         .then(() => {
-  //             this.guestName = '';
-  //             this.guestPicture = null;
-  //         });
-  // }
-
-
 
     async presentModal() {
         const modal = await this.modalCtrl.create({
@@ -150,5 +137,18 @@ export class TableDetailPage implements OnInit {
       // this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(image && (image.dataUrl));
   // }
 
+    doRefresh(event) {
+        const punArray = [
+            'You are souper!',
+            'Kick some asparag-ass!',
+            'You seem like a fungi',
+            'Love you. Pho real.',
+        ];
+        const randomNumber = Math.floor(Math.random() * punArray.length);
+        this.pun = punArray[randomNumber];
+        setTimeout(() => {
+            event.target.complete();
+        }, 4000);
+    }
 
 }

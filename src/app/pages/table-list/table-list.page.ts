@@ -10,6 +10,7 @@ export class TableListPage implements OnInit {
 
     public tableList: Array<any>;
     public guestList: Array<any> = [];
+    public pun: string;
 
   constructor(private tableService: TableService) { }
 
@@ -47,6 +48,20 @@ export class TableListPage implements OnInit {
 
 
   }
+
+    doRefresh(event) {
+        const punArray = [
+            'Thanks for pudding up with me',
+            'You are soy awesome',
+            'Have an egg-cellent day!',
+            'Today is a good day to be a couch potato',
+        ];
+        const randomNumber = Math.floor(Math.random() * punArray.length);
+        this.pun = punArray[randomNumber];
+        setTimeout(() => {
+            event.target.complete();
+        }, 4000);
+    }
 
 
 }
