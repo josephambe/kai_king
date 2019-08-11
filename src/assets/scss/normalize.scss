@@ -1,13 +1,12 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
-  /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
 
-  /* Document
-     ========================================================================== */
-
-  /**
-   * 1. Correct the line height in all browsers.
-   * 2. Prevent adjustments of font size after orientation changes in iOS.
-   */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
 
 html {
   line-height: 1.15; /* 1 */
@@ -33,6 +32,8 @@ main {
   display: block;
 }
 
+/* FONTS
+   ========================================================================== */
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
@@ -89,22 +90,62 @@ p.tableDetail {
 
 }
 
-  ion-refresher-content.blue {
-    --color: var(--ion-color-secondary);
-  }
-
-  ion-refresher-content.pink {
-    --color: var(--ion-color-success);
-    margin-bottom: 20px;
-  }
 /**
  * Correct the font size and margin on `h6` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari. Used for links
  */
-
 h6 {
   text-decoration: underline;
 }
+
+/* COLOURS
+   ========================================================================== */
+
+ion-refresher-content.blue {
+  --color: var(--ion-color-secondary);
+}
+
+ion-refresher-content.pink {
+  --color: var(--ion-color-success);
+  margin-bottom: 20px;
+}
+
+ion-item.blue {
+  color: var(--ion-color-primary);
+}
+
+ion-label.blue {
+  color: var(--ion-color-primary);
+}
+
+ion-input.blue {
+  color: var(--ion-color-primary);
+}
+
+ion-item.yellow {
+  color: var(--ion-color-warning);
+}
+
+ion-label.yellow {
+  color: var(--ion-color-warning);
+}
+
+ion-button.yellow {
+  --background: var(--ion-color-warning);
+}
+
+ion-tab-button.table-list {
+  --color-selected: var(--ion-color-secondary);
+}
+
+ion-tab-button.uploader {
+  --color-selected: var(--ion-color-warning);
+}
+
+ion-tab-button.profile {
+  --color-selected: var(--ion-color-success);
+}
+
 
 /* Grouping content
    ========================================================================== */
@@ -219,155 +260,128 @@ ion-card.tableList {
   padding: 2%;
   border-top: 4px solid var(--ion-color-secondary);
 
-  //border: 2px;
-  //box-shadow: 0 1px 10px var(--ion-color-primary);
-}
-
-ion-item.blue {
-  color: var(--ion-color-primary);
-}
-
-ion-label.blue {
-  color: var(--ion-color-primary);
-}
-
-ion-input.blue {
-  color: var(--ion-color-primary);
-}
-
-//ion-input.yellow {
-//  color: var(--ion-color-warning);
-//}
-
-ion-item.yellow {
-  color: var(--ion-color-warning);
-}
-
-ion-label.yellow {
-  color: var(--ion-color-warning);
-}
-
-ion-button.yellow {
-    --background: var(--ion-color-warning);
 }
 
 
-/* Forms
+/* DIVS and FORMS
    ========================================================================== */
-  /**
- * Set up forms center of app with margin
- * Designed for authentication pages..
- */
+/**
+* Set up forms center of app with margin
+* Designed for authentication pages..
+*/
 
-  div.form {
-    text-align:center;
-    margin: 10%;
-    margin-top: 20%;
-  }
+div.form {
+  text-align: center;
+  margin: 10%;
+  margin-top: 20%;
+}
 
-  div.center {
-    text-align:center;
-    margin-top: 5%;
-  }
+div.center {
+  text-align: center;
+  margin-top: 5%;
+}
 
-  div.d0 {
-    width:100%;
-    height: 300px;
-  }
+div.d0 {
+  width: 100%;
+  height: 300px;
+}
 
-  div.outer-div {
-    height: 300px;
-    overflow: hidden;
-  }
+div.outer-div {
+  height: 300px;
+  overflow: hidden;
+}
 
-  div.fixedHeight {
-    height: 300px;
-    width: 100%;
-    display: table;
-  }
+div.fixedHeight {
+  height: 300px;
+  width: 100%;
+  display: table;
+}
 
-  div.soloImage {
-    width: 100%;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    background-color: var(--ion-color-primary);
-  }
+div.soloImage {
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background-color: var(--ion-color-primary);
+}
 
-  div.centerDiv {
-    padding-top: 40%;
-    padding-bottom: 50%;
-    width: 60%;
-    margin: 0 auto;
-  }
+div.centerDiv {
+  padding-top: 40%;
+  padding-bottom: 50%;
+  width: 60%;
+  margin: 0 auto;
+}
 
-  div.soloImageText {
-    padding: 5%;
-  }
+div.soloImageText {
+  padding: 5%;
+}
 
-  div.pictureGrid {
-    height: 80px;
-    width: 100%;
-  }
+div.pictureGrid {
+  height: 80px;
+  width: 100%;
+}
 
-  div.gridImage {
-    height: 80px;
-    overflow: hidden;
-  }
+div.gridImage {
+  height: 80px;
+  overflow: hidden;
+}
 
-  div.fixedHeightSmall {
-    height: 80px;
-    width: 100%;
-    display: table;
-  }
+div.fixedHeightSmall {
+  height: 80px;
+  width: 100%;
+  display: table;
+}
 
 
-  ion-button.registerPages {
-    margin-top: 15%;
-  }
+/* ION SPECIFIC
+   ========================================================================== */
+ion-icon.round {
+  color: var(--ion-color-primary-contrast) !important;
+  font-size: 24px;
+}
 
-  ion-button.uploader {
-    --background: var(--ion-color-warning);
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5%;
-    --border-radius: 50px;
-    font-size: 24px;
-    margin-top: 10%;
+ion-card.pictureCard {
+  object-fit: contain;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 120%;
 
-  }
+}
 
-  ion-icon.round {
-    color: var(--ion-color-primary-contrast) !important;
-    font-size: 24px;
-  }
+ion-list.gridHeader {
+  margin: 10px 0 0 0;
+}
 
-  ion-card.pictureCard {
-    object-fit: contain;
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 120%;
 
-  }
+/* BUTTONS
+   ========================================================================== */
+ion-button.registerPages {
+  margin-top: 15%;
+}
 
-  ion-list.gridHeader {
-    margin: 10px 0 0 0;
-  }
+ion-button.uploader {
+  --background: var(--ion-color-warning);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  --border-radius: 50px;
+  font-size: 24px;
+  margin-top: 10%;
+}
 
-  a.roundBtn {
-    margin: 0 15px 0 15px;
-    display:inline-block;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    background-color: var(--ion-color-primary);
-    text-align: center;
-    padding: 7px 0;
-  }
-
+a.roundBtn {
+  margin: 0 15px 0 15px;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--ion-color-primary);
+  text-align: center;
+  padding: 7px 0;
+}
 
 
 /**
@@ -567,20 +581,6 @@ template {
 }
 
 
-  /* Colour
-     ========================================================================== */
-
-  ion-tab-button.table-list {
-    --color-selected: var(--ion-color-secondary);
-  }
-
-  ion-tab-button.uploader {
-    --color-selected: var(--ion-color-warning);
-  }
-
-  ion-tab-button.profile {
-    --color-selected: var(--ion-color-success);
-  }
 
 
 

@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/user/auth.service';
-import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/user/auth.service';
+import {AlertController} from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.page.html',
-  styleUrls: ['./reset-password.page.scss'],
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.page.html',
+    styleUrls: ['./reset-password.page.scss'],
 })
 
 export class ResetPasswordPage implements OnInit {
     public resetPasswordForm: FormGroup;
+
     constructor(
         private authService: AuthService,
         private alertCtrl: AlertController,
@@ -27,7 +28,8 @@ export class ResetPasswordPage implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 
     resetPassword(resetPasswordForm: FormGroup): void {
         if (!resetPasswordForm.valid) {
@@ -55,7 +57,7 @@ export class ResetPasswordPage implements OnInit {
                 async error => {
                     const errorAlert = await this.alertCtrl.create({
                         message: error.message,
-                        buttons: [{ text: 'Ok', role: 'cancel' }],
+                        buttons: [{text: 'Ok', role: 'cancel'}],
                     });
                     await errorAlert.present();
                 }

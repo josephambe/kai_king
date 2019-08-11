@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/user/auth.service';
-import { LoadingController, AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/user/auth.service';
+import {LoadingController, AlertController} from '@ionic/angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+    selector: 'app-register',
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
 
@@ -34,8 +34,8 @@ export class RegisterPage implements OnInit {
         });
     }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
     async signupUser(signupForm: FormGroup): Promise<void> {
         if (!signupForm.valid) {
@@ -56,7 +56,7 @@ export class RegisterPage implements OnInit {
                     this.loading.dismiss().then(async () => {
                         const alert = await this.alertCtrl.create({
                             message: error.message,
-                            buttons: [{ text: 'Ok', role: 'cancel' }],
+                            buttons: [{text: 'Ok', role: 'cancel'}],
                         });
                         await alert.present();
                     });

@@ -1,30 +1,30 @@
-
 <ion-content padding>
+
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5">
         <ion-refresher-content class="blue" refreshingSpinner="bubbles" refreshingText="{{pun}}">
         </ion-refresher-content>
     </ion-refresher>
 
-  <h1>At this table we eat...</h1>
+    <h1>At this table we eat...</h1>
 
-  <ion-list>
-    <ion-card
-            class="tableList"
-            tappable
-            *ngFor="let table of tableList"
-            routerLink="/table-detail/{{table.id}}"
-    >
+    <ion-list>
+        <ion-card
+                class="tableList"
+                tappable
+                *ngFor="let table of tableList"
+                routerLink="/table-detail/{{table.id}}"
+        >
 
-        <ion-card-header>{{table?.name}}</ion-card-header>
-        <p>{{table?.description}}</p>
-        <p>Chefs: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
-    </ion-card>
+            <ion-card-header>{{table?.name}}</ion-card-header>
+            <p>{{table?.description}}</p>
+            <p>Chefs: <strong *ngFor="let guest of table?.guests">{{guest?.guestName}}, </strong></p>
+        </ion-card>
 
-  </ion-list>
+    </ion-list>
 
-  <ion-button expand="block" color="primary" routerLink="/table-create">
-    Create a new Table
-  </ion-button>
+    <ion-button expand="block" color="primary" routerLink="/table-create">
+        Create a new Table
+    </ion-button>
 
 </ion-content>
 

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { AuthService } from '../../services/user/auth.service';
-import { ProfileService } from '../../services/user/profile.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {AlertController} from '@ionic/angular';
+import {AuthService} from '../../services/user/auth.service';
+import {ProfileService} from '../../services/user/profile.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-profile',
@@ -19,27 +19,25 @@ export class ProfileSettingsPage implements OnInit {
         private authService: AuthService,
         private profileService: ProfileService,
         private router: Router
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.profileService
             .getUserProfile()
             .get()
-            .then( userProfileSnapshot => {
+            .then(userProfileSnapshot => {
                 this.userProfile = userProfileSnapshot.data();
                 this.birthDate = userProfileSnapshot.data().birthDate;
             });
     }
 
     logOut(): void {
-        this.authService.logoutUser().then( () => {
+        this.authService.logoutUser().then(() => {
             this.router.navigateByUrl('login');
         });
     }
 
-    goToProfile() {
-        this.router.navigateByUrl('/tabs/profile');
-    }
 
     async updateName(): Promise<void> {
         const alert = await this.alertCtrl.create({
@@ -59,7 +57,7 @@ export class ProfileSettingsPage implements OnInit {
                 },
             ],
             buttons: [
-                { text: 'Cancel' },
+                {text: 'Cancel'},
                 {
                     text: 'Save',
                     handler: data => {
@@ -81,11 +79,11 @@ export class ProfileSettingsPage implements OnInit {
     async updateEmail(): Promise<void> {
         const alert = await this.alertCtrl.create({
             inputs: [
-                { type: 'text', name: 'newEmail', placeholder: 'Your new email' },
-                { name: 'password', placeholder: 'Your password', type: 'password' },
+                {type: 'text', name: 'newEmail', placeholder: 'Your new email'},
+                {name: 'password', placeholder: 'Your password', type: 'password'},
             ],
             buttons: [
-                { text: 'Cancel' },
+                {text: 'Cancel'},
                 {
                     text: 'Save',
                     handler: data => {
@@ -107,11 +105,11 @@ export class ProfileSettingsPage implements OnInit {
     async updatePassword(): Promise<void> {
         const alert = await this.alertCtrl.create({
             inputs: [
-                { name: 'newPassword', placeholder: 'New password', type: 'password' },
-                { name: 'oldPassword', placeholder: 'Old password', type: 'password' },
+                {name: 'newPassword', placeholder: 'New password', type: 'password'},
+                {name: 'oldPassword', placeholder: 'Old password', type: 'password'},
             ],
             buttons: [
-                { text: 'Cancel' },
+                {text: 'Cancel'},
                 {
                     text: 'Save',
                     handler: data => {

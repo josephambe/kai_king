@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TableService } from '../../services/table/table.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {TableService} from '../../services/table/table.service';
 
 @Component({
-  selector: 'app-table-create',
-  templateUrl: './table-create.page.html',
-  styleUrls: ['./table-create.page.scss'],
+    selector: 'app-table-create',
+    templateUrl: './table-create.page.html',
+    styleUrls: ['./table-create.page.scss'],
 })
 export class TableCreatePage implements OnInit {
 
-  constructor(private router: Router, private tableService: TableService) { }
+    constructor(private router: Router, private tableService: TableService) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
     createTable(
         tableName: string,
